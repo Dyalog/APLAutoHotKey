@@ -1,0 +1,23 @@
+ Run←{
+⍝ ⍵ ←→ text file
+⍝      each line 3 characters define an APL key
+⍝      KAS
+⍝      K ←→ key on normal layout
+⍝      A ←→ APL glyph to produce
+⍝      S ←→     glyph to produce while shift is pressed
+     ⍺←'<^>!'   ⍝ Shifting key (default AltGr)
+     nl←⎕UCS 10 13 ⋄ Split←((~∊⍨)⊆⊢)
+     map←↑nl Split ⍵
+     'Caps'≡⍺:Caps map
+     'AltGr'≡⍺:'<^>!'Compose map
+⍝ TODO
+⍝ "!" → "{!}"
+⍝ ; → `;
+⍝ \ → VKDC
+⍝ Ctrl → <^> :: c v s shifted
+⍝ allow specify left or right
+⍝ Alt <! <!> >!
+⍝ Win
+⍝ AltGr + CapsLock bugs
+⍝    Caps+Shift+x leaves Caps on
+ }
