@@ -1,0 +1,20 @@
+ Prefix←{
+     map←⍵
+     pk←⍺
+     nl←⎕UCS 10
+     r←pk,'::',nl
+     r,←'{',nl
+     r,←'  ih := InputHook("L1 M")',nl
+     r,←'  uh.Start()',nl
+     r,←'  ih.Wait()',nl
+     r,←'  Switch ih.Input {',nl
+
+     Compose←{
+         (k a s)←⍵
+         r←'    Case "',k,'":',nl
+         r,←'      Send "',a,'":',nl
+     }
+
+     r,←,(Compose⍤1)map
+
+ }
