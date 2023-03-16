@@ -1,0 +1,13 @@
+ Compose2←{
+⍝ ⍺ ←→ Shifting key AutoHotKey representation
+⍝ ⍵ ←→ keymap matrix
+⍝ each line maps an ASCII glyph to an APL glyph
+⍝ ⍵[;1] ←→ ASCII glyph (input)
+⍝ ⍵[;2] ←→ APL glyph (output)
+⍝ ← ←→ AutoHotKey script text
+     apl←⍺
+     (k a s)←↓⍉⍵
+     nl←⎕UCS 10
+     shift←'+'
+     ⊃,/,∘nl¨{(k a s)←⍵ ⋄ apl,k,'::Send "',a,'"',nl,apl,shift,k,'::Send "',s,'"'}¨↓⍵
+ }
