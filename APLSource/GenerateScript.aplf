@@ -1,0 +1,39 @@
+ GenerateScript←{
+⍝ ⍵ ←→ options JSON namespace. All members (1≥≢⍴)
+⍝ ⍵.layout    ←→ (1=≡)(char) :: path to .tsv file which maps ASCII glyphs to APL glyphs
+⍝ ⍵.shifts    ←→ (2=≡)(char) :: shifting key(s)
+⍝ ⍵.prefixes  ←→ (1≥≡)(char) :: prefix key(s)
+
+     map←##.APLSource.keymaps⍎⍵.layout
+     script←''
+
+     shifts←ahk_shifts∘⍎¨⊆⍵.shifts
+
+     ⍝script,←⊃,/ShiftCompose∘map¨⊆shifts
+
+     script←⊃,/Compose2∘map¨⊆shifts
+     script
+
+     script,←⊃,/ComposeOLD∘map¨⊆shifts
+
+
+
+     do_caps←(⊂'CapsLock')∊⍵.shifts
+     script,←{do_caps:Caps map ⋄ ''}⍬
+
+     script
+
+     'Caps'≡⍵.shifts:Caps ⍵.map
+     'AltGr'≡⍺:'<^>!'Compose ⍵.map
+     ahk_shifts←⎕NS ⍬
+
+⍝ TODO
+⍝ \ → VKDC
+⍝ Ctrl → <^> :: c v s shifted
+⍝ allow specify left or right
+⍝ Alt <! <!> >!
+⍝ Win
+⍝ AltGr + CapsLock bugs
+⍝    Caps+Shift+x leaves Caps on
+⍝ Ignore space! CapsLock+Space
+ }

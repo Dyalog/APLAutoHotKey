@@ -1,0 +1,5 @@
+ LoadTSV←{
+     opts←⊂'Separator'(⎕UCS 9)
+     opts,←⊂'EscapeChar' '\'
+     (⎕CSV ⎕OPT opts)⍵
+ }
