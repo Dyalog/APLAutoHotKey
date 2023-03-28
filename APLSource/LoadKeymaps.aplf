@@ -1,5 +1,5 @@
  LoadKeymaps;km;root
  'keymaps'⎕NS ⍬
  root←'C:\Users\rpark\Documents\GitHub\APLAutoHotKey\keymaps\'
- km←'en_UK' 'DA'
+ km←'en_UK' 'DA' 'DE'
  ⍎¨{'keymaps.',⍵,'←LoadTSV ''',root,⍵,'.tsv'''}¨km

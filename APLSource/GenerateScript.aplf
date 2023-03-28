@@ -4,7 +4,7 @@
 ⍝ ⍵.shifts    ←→ (2=≡)(char) :: shifting key(s)
 ⍝ ⍵.prefixes  ←→ (1≥≡)(char) :: prefix key(s)
 
-     map←##.APLSource.keymaps⍎⍵.layout
+     map←keymaps⍎⍵.layout
      script←''
 
      shifts←ahk_shifts∘⍎¨⊆⍵.shifts
