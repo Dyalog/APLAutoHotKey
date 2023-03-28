@@ -8,6 +8,13 @@ Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 
 ## Options
 
+### Layouts
+- [x] en_UK
+- [ ] en_US
+- [ ] DA
+- [ ] DE
+
+
 ### Shifting key
 This is a key which, while pressed, enables the input of APL glyphs. For example, <kbd>Ctrl + e</kbd> produces `∊`.
 
