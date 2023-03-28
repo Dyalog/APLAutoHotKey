@@ -1,0 +1,18 @@
+ r←RunTests
+ root←(⎕SE.Cider.GetProjectPath''),'/build/'
+ OutPath←{root,⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
+ LoadKeymaps
+
+ opts←⎕NS ⍬
+ opts.layout←'DE'
+ opts.shifts←'Alt'
+ opts.outpath←OutPath opts
+
+ r←Build opts
+
+ ⍝ ---
+
+
+ shifts←'CapsLock' 'LCtrl' 'RCtrl' 'LAlt' 'RAlt' 'AltGr'
+ prefixes←'`\-#'   ⍝ TODO: how to numpad
+ layouts←'en_UK' 'en_US' 'DA' 'DE'
