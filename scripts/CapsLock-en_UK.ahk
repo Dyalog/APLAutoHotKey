@@ -1,4 +1,8 @@
+#SuspendExempt
+LControl & Space::Suspend
+#SuspendExempt False
 *CapsLock::return
+CapsLock & Space::Send " "
 CapsLock & `::
 { if GetKeyState("Shift","P") {
   Send "⌺"
