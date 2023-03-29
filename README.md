@@ -9,10 +9,12 @@ Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 ## Options
 
 ### Layouts
-- [x] en_UK
-- [ ] en_US
-- [ ] DA
-- [ ] DE
+- [x] en_GB
+- [x] en_US
+- [x] da_DK
+- [x] de_DE
+- [x] es_ES
+- [x] fr_FR
 
 
 ### Shifting key
