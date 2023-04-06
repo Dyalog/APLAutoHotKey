@@ -15,7 +15,10 @@ Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 - [x] de_DE
 - [x] es_ES
 - [x] fr_FR
+- [ ] it_IT
+- [ ] fi_FI
 
+- [ ] Check IME matches https://dfns.dyalog.com/n_keyboards.htm (⍺ ⍵ French)
 
 ### Shifting key
 This is a key which, while pressed, enables the input of APL glyphs. For example, <kbd>Ctrl + e</kbd> produces `∊`.
