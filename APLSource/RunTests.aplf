@@ -1,11 +1,11 @@
  r←RunTests
  root←(⎕SE.Cider.GetProjectPath''),'/build/'
- OutPath←{root,⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
+ OutPath←{root,'APL-',⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
  LoadKeymaps
 
  opts←⎕NS ⍬
- opts.layout←'DE'
- opts.shifts←'Alt'
+ opts.layout←'en_GB'
+ opts.shifts←'Ctrl'
  opts.outpath←OutPath opts
 
  r←Build opts
