@@ -1,5 +1,6 @@
- LoadKeymaps;km;root
+ LoadKeymaps dir;km;root
+⍝ ⍵: project root directory
  'keymaps'⎕NS ⍬
- root←'C:\Users\rpark\Documents\GitHub\APLAutoHotKey\keymaps\'
+ root←dir,'/keymaps/'
  km←'en_GB' 'en_US' 'da_DK' 'de_DE' 'es_ES' 'fr_FR'
  ⍎¨{'keymaps.',⍵,'←LoadTSV ''',root,⍵,'.tsv'''}¨km

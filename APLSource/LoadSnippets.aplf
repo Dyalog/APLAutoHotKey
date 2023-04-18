@@ -1,0 +1,6 @@
+ LoadSnippets dir;file;name;root;sp
+ 'snippets'⎕NS ⍬
+ root←dir,'/snippets/'
+ sp←⊃(⎕NINFO ⎕OPT'Wildcard' 1)root,'/*'
+ (name file)←↓⍉↑{(2⊃⌽⎕NPARTS ⍵)(⍵)}¨sp
+ ⍎¨name{'snippets.',⍺,'←⊃⎕NGET ''',⍵,''''}¨file

@@ -1,0 +1,8 @@
+ Make
+⍝ Save application as .dws workspace
+ dir←⎕SE.Cider.GetProjectPath''
+ ⎕WSID←dir,'/build/APLAutoHotKey.dws'
+ LoadKeymaps dir
+ LoadSnippets dir
+ ⎕LX←' ''Welcome to APLAutoHotKey'' '
+ ⎕SAVE ⎕WSID
