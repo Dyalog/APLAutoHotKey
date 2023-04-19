@@ -1,14 +1,17 @@
  r←RunTests
- root←(⎕SE.Cider.GetProjectPath''),'/build/'
- OutPath←{root,'APL-',⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
- LoadKeymaps
+ project_dir←⎕SE.Cider.GetProjectPath''
+ OutPath←{project_dir,'/build/','APL-',⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
+ LoadKeymaps project_dir
+ LoadSnippets project_dir
 
  opts←⎕NS ⍬
- opts.layout←'en_GB'
+ opts.layout←'de_DE'
  opts.shifts←'Ctrl'
+ opts.suspend_on_classic←1
+ opts.suspend←'LControl & Space'
  opts.outpath←OutPath opts
 
- r←Build opts
+ r←MakeScript opts
 
  ⍝ ---
 
