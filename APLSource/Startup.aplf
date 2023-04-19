@@ -1,5 +1,6 @@
  Startup←{
 ⍝ Save AHK script to startup folder
+⍝ Requires .NET Framework OR https://www.nuget.org/packages/Microsoft.Windows.Compatibility
      ⍺←0 ⍝ 0: this user only, 1: all users
      (filename script)←⍵
 ⍝     filename: char vec :: script file name
