@@ -12,6 +12,8 @@
      ⍝script,←⊃,/ShiftCompose∘map¨⊆shifts
 
      script←⊃,/Compose2∘map¨⊆shifts
+     script,←SuspendClassic ⍵
+     script,←Suspend ⍵
      script
 
      script,←⊃,/ComposeOLD∘map¨⊆shifts
@@ -21,11 +23,13 @@
      do_caps←(⊂'CapsLock')∊⍵.shifts
      script,←{do_caps:Caps map ⋄ ''}⍬
 
+     script,←SuspendClassic ⍵
      script
 
      'Caps'≡⍵.shifts:Caps ⍵.map
      'AltGr'≡⍺:'<^>!'Compose ⍵.map
      ahk_shifts←⎕NS ⍬
+
 
 ⍝ TODO
 ⍝ \ → VKDC

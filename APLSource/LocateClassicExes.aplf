@@ -1,0 +1,10 @@
+ LocateClassicExes←{
+⍝ Requires .NET Framework OR https://www.nuget.org/packages/Microsoft.Windows.Compatibility
+     ⎕USING←'Microsoft.Win32'
+     dyalog←Registry.CurrentUser.OpenSubKey'SOFTWARE\Dyalog' 1
+     versions←dyalog.GetSubKeyNames
+     classic←('Dyalog APL/W(-64)? [0-9]+.[0-9]$'⎕S'&')versions
+     reg_path←(⍕dyalog)∘,¨'\',¨classic
+     exe_path←{Registry.GetValue ⍵'dyalog' ''}¨reg_path
+     ,∘'dyalog.exe'¨exe_path,¨'\'
+ }

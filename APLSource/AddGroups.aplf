@@ -1,0 +1,6 @@
+ AddGroups←{
+⍝ ⍵: vtv paths to dyalog exes
+⍝ ←: char vec GroupAdd lines
+     newline←⎕UCS 10
+     ⊃,/'GroupAdd "Classic", "ahk_exe '∘,¨⍵,¨⊂'"',⎕UCS 10
+ }
