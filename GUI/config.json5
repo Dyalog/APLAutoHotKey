@@ -1,0 +1,12 @@
+{
+    locales:[
+		{        
+            name: "English (UK)",
+            keymap: "en_GB.tsv",
+        },
+        {
+            name: "English (US)",
+            keymap: "en_US.tsv",
+        }
+	]
+}

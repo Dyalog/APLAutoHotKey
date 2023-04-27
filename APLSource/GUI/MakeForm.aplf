@@ -1,0 +1,23 @@
+ MakeForm←{
+⍝ ⍵: JSON config text
+⍝ ←: HTML form text
+     j←0(⎕JSON ⎕OPT'Dialect' 'JSON5')⍵
+     d←0
+     t←⊂'form'
+     v←⊂''
+     a←⊂''
+
+     d,←1
+     t,←⊂'label'
+     v,←⊂''
+     a,←⊂↑('name' 'locale')('id' 'locale')
+
+     d,←2⍨¨j.locales.keymap
+     t,←'option'⍨¨j.locales.keymap
+     v,←j.locales.name
+     a,←(⊂'value'),⍥⊂¨j.locales.keymap
+
+     ⎕XML⍉↑d t v a
+⍝ TODO: can we add members out of place using the parent vector?
+
+ }
