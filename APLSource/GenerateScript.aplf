@@ -7,12 +7,17 @@
      map←keymaps⍎⍵.layout
      script←''
 
-     shifts←ahk_shifts∘⍎¨⊆⍵.shifts
+     Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
+     Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
+⍝     shifts←ahk_shifts∘⍎¨⊆Alt Ctrl ⍵.shifts
+     shifts←Alt Ctrl ⍵.shifts
 
+     script←⊃,/HotKey∘map¨⊆shifts
      ⍝script,←⊃,/ShiftCompose∘map¨⊆shifts
 
-     script←⊃,/Compose2∘map¨⊆shifts
-     script,←SuspendClassic ⍵
+⍝     script←⊃,/Compose2∘map¨⊆shifts
+     script,←AddGroups LocateClassicExes ⍬
+⍝     script,←SuspendClassic ⍵
      script,←Suspend ⍵
      script
 

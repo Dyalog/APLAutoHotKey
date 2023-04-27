@@ -1,0 +1,5 @@
+ ReplaceForBoth←{
+⍝ Replace ⍵⍵ in ⍵ with ⍺⍺ if both of ⍵⍵ found in ⍵
+     opts←⍵⍵ ⋄ Rmv←~∘opts ⋄ Add←⍺⍺∘(,⍥⊆) ⋄ both←∧/⍵⍵∊⍵
+     (Add⍤Rmv⍣both)⍵
+ }
