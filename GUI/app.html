@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			form {
+				display: flex;
+				flex-direction: column;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<label for="locale">Choose language: </label>
+			<select name="locale">
+				<option value="en_GB.tsv">English (UK)</option>
+			</select>
+			<label for="prefix">Prefix key</label>
+			<div>
+				<input type="text" name="prefix" id="prefix" maxlength="0" onkeydown="getKeyPress(event)">
+				<span id="prefix_out"></span>
+			</div>
+			<label for="shift">Shifting key</label>
+			<select name="shift" id="shift">
+				<option value="CapsLock">Caps Lock</option>
+				<option value="Ctrl">Control</option>
+				<option value="Alt">Alt</option>
+			</select>
+		</input>
+		</form>
+		<script src="app.js"></script>
+	</body>
+</html>
