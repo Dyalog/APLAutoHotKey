@@ -29,6 +29,7 @@ This is a key which, while pressed, enables the input of APL glyphs. For example
 - [ ] Left Alt
 - [ ] Right Alt
 - [ ] AltGr
+- [ ] Can translate JS key code into AHK SC scan code?
 
 ### Prefix key
 A **prefix key**, also known is a **dead key**, is a key which itself does not produce a character. After the prefix key is pressed, the next key may produce an APL glyph.
