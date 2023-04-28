@@ -1,32 +1,50 @@
-#SuspendExempt
-LControl & Space::Suspend
-#SuspendExempt False
+user_suspend := False
 
-
-
-^SC029::Send "⋄"
-^+SC029::Send "⌺"
-Control & a::
+CapsLock & SC029::
 { if GetKeyState("Shift","P") {
-  Send ""
+  Send "⌺"
 } else {
-  Send "⍺"
+  Send "⋄"
 }}
 
-GroupAdd "Classic", "ahk_exe C:\Program Files (x86)\Dyalog\Dyalog APL 12.1 Classic\dyalog.exe"
+
+
+RAlt & SC029::
+{ if GetKeyState("Shift","P") {
+  Send "⌺"
+} else {
+  Send "⋄"
+}}
+
+
+RControl & i::
+{ if GetKeyState("Shift","P") {
+  Send "⍸"
+} else {
+  Send "⍳"
+}}
+
 GroupAdd "Classic", "ahk_exe C:\Program Files\Dyalog\Dyalog APL-64 17.1 Classic\dyalog.exe"
 
-^t::Send "~"
-^+t::Send "⍨"
-^6::Send "≥"
-^+6::Send "⍉"
-
 Check() {
-  if WinActive("ahk_group Classic") {
+  if WinActive("ahk_group Classic") || user_suspend {
     Suspend True
   } else {
     Suspend False
   }
 }
+ToggleSuspend() {
+  global user_suspend
+  if user_suspend {
+    user_suspend := False
+  } else {
+    user_suspend := True
+  }
+}
 
 SetTimer Check, 500
+
+#SuspendExempt
+LControl & Space::ToggleSuspend
+#SuspendExempt False
+

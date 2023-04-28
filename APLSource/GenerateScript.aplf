@@ -5,37 +5,22 @@
 ⍝ ⍵.prefixes  ←→ (1≥≡)(char) :: prefix key(s)
 
      map←keymaps⍎⍵.layout
-     script←''
+     script←'user_suspend := False',⎕UCS 10
 
-     shifts←ahk_shifts∘⍎¨⊆⍵.shifts
+     Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
+     Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
+     AltGr←('AltGr'⎕R'RAlt')
 
-     ⍝script,←⊃,/ShiftCompose∘map¨⊆shifts
+     shifts←Alt Ctrl AltGr ⍵.shifts
+     script,←⊃,/HotKey∘map¨⊆shifts
 
-     script←⊃,/Compose2∘map¨⊆shifts
-     script,←SuspendClassic ⍵
+     script,←AddGroups LocateClassicExes ⍬
      script,←Suspend ⍵
+
      script
-
-     script,←⊃,/ComposeOLD∘map¨⊆shifts
-
-
-
-     do_caps←(⊂'CapsLock')∊⍵.shifts
-     script,←{do_caps:Caps map ⋄ ''}⍬
-
-     script,←SuspendClassic ⍵
-     script
-
-     'Caps'≡⍵.shifts:Caps ⍵.map
-     'AltGr'≡⍺:'<^>!'Compose ⍵.map
-     ahk_shifts←⎕NS ⍬
-
 
 ⍝ TODO
 ⍝ \ → VKDC
-⍝ Ctrl → <^> :: c v s shifted
-⍝ allow specify left or right
-⍝ Alt <! <!> >!
 ⍝ Win
 ⍝ AltGr + CapsLock bugs
 ⍝    Caps+Shift+x leaves Caps on

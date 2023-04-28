@@ -1,0 +1,16 @@
+ HotKey←{
+⍝ ⍵ ←→ kas matrix
+⍝ ← ←→ AutoHotKey script text
+     nl←⎕UCS 10
+     Compose←{
+         (k a s)←⍵
+         r←⍺,' & ',k,'::',nl
+         r,←'{ if GetKeyState("Shift","P") {',nl
+         r,←'  Send "',s,'"',nl
+         r,←'} else {',nl
+         r,←'  Send "',a,'"',nl
+         r,←'}}',nl
+         r
+     }
+     ,⍺(Compose⍤1)⍵
+ }

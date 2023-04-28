@@ -1,9 +1,10 @@
  Suspend←{
 ⍝ ⍵: options namespace
 ⍝ ←: snippet to suspend hotkeys with user's hotkey or when classic interpreter window in focus
-     0=⍵.⎕NC'suspend':''
+     0=⍵.⎕NC'suspend':snippets.suspend
      txt←snippets.suspend
      Esc←('&'⎕R'\\&')
-     Replace←'LControl & Space'⎕R(Esc ⍵.suspend)
-     Replace snippets.suspend
+     Replace←'%SUSPENDKEYS%'⎕R(Esc ⍵.suspend)
+     UnComment←~∘(';'/⍨''≢⍵.suspend)
+     UnComment Replace snippets.suspend
  }

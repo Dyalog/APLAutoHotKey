@@ -1,21 +1,33 @@
- r←RunTests
+ r←RunTests all
  project_dir←⎕SE.Cider.GetProjectPath''
  OutPath←{project_dir,'/build/','APL-',⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
  LoadKeymaps project_dir
  LoadSnippets project_dir
 
- opts←⎕NS ⍬
- opts.layout←'de_DE'
- opts.shifts←'Ctrl'
- opts.suspend_on_classic←1
- opts.suspend←'LControl & Space'
- opts.outpath←OutPath opts
+ :If ~all
+     opts←⎕NS ⍬
+     opts.layout←'en_GB'
+     opts.shifts←'CapsLock' 'AltGr'
+     opts.suspend←'LControl & Space'
+     opts.outpath←OutPath opts
 
- r←MakeScript opts
+     r←MakeScript opts
 
- ⍝ ---
+ :Else
 
+     shifts←'CapsLock' 'LCtrl' 'RCtrl' 'LAlt' 'RAlt'
+     combos←∪∪¨,∘.(,⍥⊆)⍣2⍨shifts   ⍝ Up to 3 shifting keys
+     layouts←'en_GB' 'en_US' 'da_DK' 'de_DE' 'es_ES' 'fr_FR'
 
- shifts←'CapsLock' 'LCtrl' 'RCtrl' 'LAlt' 'RAlt' 'AltGr'
- prefixes←'`\-#'   ⍝ TODO: how to numpad
- layouts←'en_UK' 'en_US' 'DA' 'DE'
+     MakeOpts←{
+         o←⎕NS ⍬
+         o.layout←⍺
+         o.shifts←⍵
+         o.suspend←'LCtrl & Space'
+         o.outpath←OutPath o
+         o
+     }
+
+     r←⍪MakeScript¨,layouts∘.MakeOpts combos
+
+ :EndIf
