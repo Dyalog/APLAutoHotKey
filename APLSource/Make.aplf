@@ -2,17 +2,16 @@
 ⍝ Save application as .dws workspace
  ⎕CS #
  ⎕SE.Cider.(project_dir←GetProjectPath'')
- ⎕WSID←⎕SE.Cider.project_dir,'/build/APLAutoHotKey.dws'
+ ⎕WSID←⎕SE.Cider.project_dir,'/build/APLAutoHotKey-',APLAutoHotKey.version,'.dws'
  APLAutoHotKey.LoadKeymaps ⎕SE.Cider.project_dir
  APLAutoHotKey.LoadSnippets ⎕SE.Cider.project_dir
  '#'⎕NS'APLAutoHotKey.'∘,¨APLAutoHotKey.⎕NL-⍳9
  ⎕EX'APLAutoHotKey'
  ⎕LX←' ''Welcome to APLAutoHotKey'' '
- _←⎕SE.Cider.(CloseProject project_dir)
- ⎕←'Project closed.'
+ ⎕SE.Cider.CloseProject ⎕SE.Cider.project_dir
  ⎕TKILL ⎕TNUMS
  ⎕SAVE ⎕WSID
  names←⎕NL-⍳9
  ⎕EX names,⊂'names'
- _←⎕SE.Cider.(OpenProject project_dir)
+ ⎕SE.Cider.OpenProject ⎕SE.Cider.project_dir
  ⎕EX'⎕SE.Cider.project_dir'
