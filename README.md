@@ -28,12 +28,12 @@ Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 This is a key which, while pressed, enables the input of APL glyphs. For example, <kbd>Ctrl + e</kbd> produces `∊`.
 
 - [x] CapsLock
-- [ ] Left Control
-- [ ] Right Control
-- [ ] Control (both)
-- [ ] Left Alt
-- [ ] Right Alt
-- [ ] Alt (both)
+- [x] Left Control
+- [x] Right Control
+- [x] Control (both)
+- [x] Left Alt
+- [x] Right Alt
+- [x] Alt (both)
 - [ ] LWin
 - [ ] RWin
 - [ ] Win (both)
