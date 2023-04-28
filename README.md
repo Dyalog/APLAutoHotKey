@@ -1,6 +1,31 @@
 # APLAutoHotKey
 Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 
+## Usage
+1. Obtain the URL for the latest release workspace fromt the [Releases page](https://github.com/rikedyp/APLAutoHotKey/releases) and import APLAutoHotKey:
+
+  ```
+   ]Get -t=APLAutoHotKey -u https://github.com/rikedyp/APLAutoHotKey/releases/download/v0.0.0/APLAutoHotKey-0.0.0.dws
+  ```
+
+2. Set options
+
+  ```
+   opt←⎕NS⍬
+   opt.shifts←'CapsLock' 'RAlt'
+   opt.layout←'en_GB'
+   opt.outpath←'/tmp/APL-en_GB-CapsLockAlt.ahk'
+  ```
+  
+3. Build script
+
+  ```
+         APLAutoHotKey.Build opt
+   ┌─┬──────────────────────────────────────────────────┐
+   │0│Saved: /tmp/APL-en_GB-CapsLockAlt.ahk (9404 bytes)│
+   └─┴──────────────────────────────────────────────────┘
+  ```
+  
 ## TODO
 - [x] Enumerate options
 - [ ] Test individual options
