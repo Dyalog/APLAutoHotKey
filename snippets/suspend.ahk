@@ -15,7 +15,7 @@ ToggleSuspend() {
   }
 }
 
-SetTimer Check, 500   ; Check for suspend state every 500 milliseconds
+SetTimer Check, 500
 
 ;#SuspendExempt
 ;%SUSPENDKEYS%::ToggleSuspend
