@@ -9,38 +9,21 @@
 
      Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
      Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
-⍝     shifts←ahk_shifts∘⍎¨⊆Alt Ctrl ⍵.shifts
+     AltGr←('AltGr'⎕R
+
      shifts←Alt Ctrl ⍵.shifts
 
+     nl←⎕UCS 10
+     script←'user_suspend := False',nl
      script←⊃,/HotKey∘map¨⊆shifts
-     ⍝script,←⊃,/ShiftCompose∘map¨⊆shifts
 
-⍝     script←⊃,/Compose2∘map¨⊆shifts
      script,←AddGroups LocateClassicExes ⍬
-⍝     script,←SuspendClassic ⍵
      script,←Suspend ⍵
+
      script
-
-     script,←⊃,/ComposeOLD∘map¨⊆shifts
-
-
-
-     do_caps←(⊂'CapsLock')∊⍵.shifts
-     script,←{do_caps:Caps map ⋄ ''}⍬
-
-     script,←SuspendClassic ⍵
-     script
-
-     'Caps'≡⍵.shifts:Caps ⍵.map
-     'AltGr'≡⍺:'<^>!'Compose ⍵.map
-     ahk_shifts←⎕NS ⍬
-
 
 ⍝ TODO
 ⍝ \ → VKDC
-⍝ Ctrl → <^> :: c v s shifted
-⍝ allow specify left or right
-⍝ Alt <! <!> >!
 ⍝ Win
 ⍝ AltGr + CapsLock bugs
 ⍝    Caps+Shift+x leaves Caps on

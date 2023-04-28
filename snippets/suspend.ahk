@@ -6,19 +6,17 @@ Check() {
     Suspend False
   }
 }
-
-SetTimer Check, 500
-
-#SuspendExempt
-LControl & Space::
-{ if user_suspend
-  {
+ToggleSuspend() {
+  global user_suspend
+  if user_suspend {
     user_suspend := False
   } else {
     user_suspend := True
   }
 }
-#SuspendExempt False
 
+SetTimer Check, 500   ; Check for suspend state every 500 milliseconds
 
-; what if no classic?
+;#SuspendExempt
+;%SUSPENDKEYS%::ToggleSuspend
+;#SuspendExempt False
