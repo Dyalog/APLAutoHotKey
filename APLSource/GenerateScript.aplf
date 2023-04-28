@@ -5,17 +5,14 @@
 ⍝ ⍵.prefixes  ←→ (1≥≡)(char) :: prefix key(s)
 
      map←keymaps⍎⍵.layout
-     script←''
+     script←'user_suspend := False',⎕UCS 10
 
      Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
      Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
-     AltGr←('AltGr'⎕R
+     AltGr←('AltGr'⎕R'RAlt')
 
-     shifts←Alt Ctrl ⍵.shifts
-
-     nl←⎕UCS 10
-     script←'user_suspend := False',nl
-     script←⊃,/HotKey∘map¨⊆shifts
+     shifts←Alt Ctrl AltGr ⍵.shifts
+     script,←⊃,/HotKey∘map¨⊆shifts
 
      script,←AddGroups LocateClassicExes ⍬
      script,←Suspend ⍵
