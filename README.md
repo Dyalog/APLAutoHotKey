@@ -39,6 +39,9 @@ This is a key which, while pressed, enables the input of APL glyphs. For example
 - [ ] Win (both)
 - [ ] AltGr
 
+> AltGr sends a LCtrl+LAlt signal. AltGr and LAlt can get different behaviours by mapping `<^>!::RAlt` and using `LAlt` and `RAlt`. If both Left Alt and Right Alt are selected, then a single `Alt` hotkey is used, but if only Left Alt is selected, then `AltGr` must be remapped to `RAlt`. TODO: does this affect e.g. accents or special characters via AltGr on regular Windows keyboard?
+> Use of `LCtrl`, `Ctrl`, `RAlt` or `Alt` can interfere with `AltGr` behaviour
+
 ### Prefix key
 A **prefix key**, also known is a **dead key**, is a key which itself does not produce a character. After the prefix key is pressed, the next key may produce an APL glyph.
 
