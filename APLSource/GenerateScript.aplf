@@ -4,7 +4,7 @@
 ⍝ ⍵.shifts    ←→ (2=≡)(char) :: shifting key(s)
 ⍝ ⍵.prefixes  ←→ (1≥≡)(char) :: prefix key(s)
 
-     map←keymaps⍎⍵.layout
+     map←keymaps⍎⍵.locale
      script←'user_suspend := False',⎕UCS 10
 
      Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')

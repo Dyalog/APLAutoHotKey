@@ -1,0 +1,4 @@
+ Send←{
+⍝ Send WebSocket message ⍵ to HTMLRenderer with ID ⍺
+     hr.WebSocketSend ⍺ ⍵ 1 1
+ }

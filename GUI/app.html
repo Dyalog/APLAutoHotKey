@@ -2,31 +2,113 @@
 <html>
 	<head>
 		<style>
+			body { text-align: center; }
 			form {
+				text-align: left;
 				display: flex;
 				flex-direction: column;
+				padding: 1em 5em;
 			}
+			form > * { padding: 0.5em; }
+			label, fieldset { margin-top: 1.5em; }
+			.error {
+				color: red;
+				font-family: monospace;
+				white-space: pre;
+			}
+			#save { width: 50%; }
 		</style>
+
+		<script>
+			$ = s => document.querySelector(s)
+			const ws = new WebSocket("ws://dyalog_root/")
+			const send = data => { ws.send(JSON.stringify(data)) }
+			ws.onmessage = function(data) {
+				// data: (error number)(message)
+				result = JSON.parse(data.data)
+				errorNumber = result[0]
+				let p = document.createElement("p")
+				p.innerHTML = result[1]
+				if ( 0 !== errorNumber ) { p.classList.add("error") }
+				$("#output").innerHTML=""
+				$("#output").appendChild(p)
+			}
+			/*
+			// File system SaveAs not available in HTMLRenderer,
+			// for now, workaround is to save to current working directory via backend
+			function download(data, filename, type) {
+				file = new Blob([data], {type: type})
+				a = document.createElement("a")
+				url = URL.createObjectURL(file)
+				a.href = url
+				a.innerHTML = "download"
+				a.download = filename
+				document.body.appendChild(a)
+				a.click()
+				setTimeout(function() {
+					document.body.removeChild(a)
+					window.URL.revokeObjectURL(url)
+				}, 0)
+			}		
+			*/
+			function saveScript () {
+				fd = new FormData($("#userOptions"))
+				opts = JSON.stringify(Object.fromEntries(fd))
+				$("#output").innerHTML = opts
+				send(Object.fromEntries(fd))
+			}
+			// TODO
+			// en_GB fix divide!
+			// Control warn about common shortcuts
+			// Alt warn about menu items
+			// Left Ctrl and Right Alt ≡ AltGr
+			// Right Alt on AltGr keyboards means both Alt keys
+			// Caps Lock option to disable CapsLock behaviour
+		</script>
 	</head>
 	<body>
-		<form>
+		<h1>APLAutoHotKey</h1>
+		<p>Generate AutoHotKey scripts for APL glyph keyboard input</p>
+		<form name="userOptions" id="userOptions">
 			<label for="locale">Choose language: </label>
 			<select name="locale">
-				<option value="en_GB.tsv">English (UK)</option>
+				<option value="en_GB">English (UK)</option>     
+				<option value="en_US">English (US)</option>     
+				<option value="da_DK">Danish (Denmark)</option>          
+				<option value="de_DE">German (Germnay)</option>
+				<option value="es_ES">Spanish (Spain)</option> 
+				<option value="fr_FR">French (France)</option>
 			</select>
-			<label for="prefix">Prefix key</label>
-			<div>
-				<input type="text" name="prefix" id="prefix" maxlength="0" onkeydown="getKeyPress(event)">
-				<span id="prefix_out"></span>
-			</div>
-			<label for="shift">Shifting key</label>
-			<select name="shift" id="shift">
-				<option value="CapsLock">Caps Lock</option>
-				<option value="Ctrl">Control</option>
-				<option value="Alt">Alt</option>
-			</select>
+			<fieldset>
+				<legend>Choose your shifting key(s)</legend>
+				<div>
+					<input type="checkbox" name="CapsLock" id="CapsLock" value="CapsLock"></input>
+					<label for="CapsLock">Caps Lock</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="LAlt" id="LAlt" value="LAlt"></input>
+					<label for="LAlt">Left Alt</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="RAlt" id="RAlt" value="RAlt"></input>
+					<label for="RAlt">Right Alt</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="LCtrl" id="LCtrl" value="LCtrl"></input>
+					<label for="LCtrl">Left Control</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="RCtrl" id="RCtrl" value="RCtrl"></input>
+					<label for="RCtrl">Right Control</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="AltGr" id="AltGr" value="AltGr"></input>
+					<label for="AltGr">AltGr</label>
+				  </div>
+			</fieldset>
 		</input>
 		</form>
-		<script src="app.js"></script>
+		<button name="save" id="save" onclick="saveScript()">Generate Script</button>
+		<div id="output"></div>
 	</body>
 </html>

@@ -1,0 +1,7 @@
+ Run
+ hr←⎕NEW⊂'HTMLRenderer'
+ dir←⎕SE.Cider.GetProjectPath''
+ hr.(Event HTML)←(('WebSocketReceive' 'Handler')('DoPopup' 'Pop'))(⊃⎕NGET dir,'/GUI/app.html')
+ hr.(Posn Size)←(0 ¯0.3645833433)(97.87036896 50.72916794)
+⍝ hr.ShowDevTools 1
+ ⎕DQ'hr'
