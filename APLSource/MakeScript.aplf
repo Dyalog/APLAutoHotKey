@@ -6,11 +6,4 @@
      b←script ⎕NPUT ⍵.outpath 1
      0('Saved: ',⍵.outpath,' (',(⍕b),' bytes)')
 
-⍝ TODO
-⍝ ! → {!}
-⍝ \ → VKDC
-⍝ Ctrl → <^> :: c v s shifted
-⍝ allow specify left or right
-⍝ Alt <! <!> >!
-⍝ Win
  }

@@ -1,7 +1,5 @@
- req←Handler arg;gui;evt;data;en;msg;opts;os;as;script;nl;number;expression;message;filename;dir;id;FileName
- (gui evt id data en msg)←arg
- ⍝⎕←'Handlin'' it baby'
- req←arg
+ req←Handler req;gui;evt;data;en;msg;opts;os;as;script;nl;number;expression;message;filename;dir;id;FileName
+ (gui evt id data en msg)←req 
  opts←0 ⎕JSON data
 ⍝ Turn shifting key options into a list of shifts
  os←opts.⎕NL ¯2 ⋄ as←##.ahk_shifts.⎕NL ¯2

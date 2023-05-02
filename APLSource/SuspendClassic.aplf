@@ -1,5 +1,0 @@
- SuspendClassic←{
-     group←AddGroups LocateClassicExes ⍬
-     0=⍵.⎕NC'suspend_on_classic':group,snippets.classic   ⍝ Default: suspend on classic
-     ⍵.suspend_on_classic/group,snippets.classic
- }

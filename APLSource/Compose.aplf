@@ -1,9 +1,0 @@
- Compose←{
-     Make←{
-         (k a s)←⍵   ⍝ key, APL glyph, shifted glyph
-         Send←{'::Send "',⍵,'"'}
-         (⍺,k,Send a),nl,(⍺,'+',k,Send s)
-     }
-     nl←⎕UCS 10
-     ,nl,⍨⍺(Make⍤1)⍵
- }

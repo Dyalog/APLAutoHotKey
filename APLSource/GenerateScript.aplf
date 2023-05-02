@@ -1,8 +1,7 @@
  GenerateScript←{
 ⍝ ⍵ ←→ options JSON namespace. All members (1≥≢⍴)
-⍝ ⍵.layout    ←→ (1=≡)(char) :: path to .tsv file which maps ASCII glyphs to APL glyphs
+⍝ ⍵.layout    ←→ (1=≡)(char) :: name of .tsv file which maps ASCII glyphs to APL glyphs
 ⍝ ⍵.shifts    ←→ (2=≡)(char) :: shifting key(s)
-⍝ ⍵.prefixes  ←→ (1≥≡)(char) :: prefix key(s)
 
      map←keymaps⍎⍵.locale
      script←'user_suspend := False',⎕UCS 10
@@ -19,10 +18,4 @@
 
      script
 
-⍝ TODO
-⍝ \ → VKDC
-⍝ Win
-⍝ AltGr + CapsLock bugs
-⍝    Caps+Shift+x leaves Caps on
-⍝ Ignore space! CapsLock+Space
  }

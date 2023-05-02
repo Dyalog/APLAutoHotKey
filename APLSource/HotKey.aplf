@@ -1,5 +1,5 @@
  HotKey←{
-⍝ ⍵ ←→ kas matrix
+⍝ ⍵ ←→ kas matrix with columns (Key)(APL Glyph)(Shifted APL Glyph)
 ⍝ ← ←→ AutoHotKey script text
      nl←⎕UCS 10
      Compose←{
