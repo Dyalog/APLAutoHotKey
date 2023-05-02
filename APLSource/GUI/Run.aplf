@@ -1,6 +1,5 @@
  Run
  hr←⎕NEW⊂'HTMLRenderer'
- dir←⎕SE.Cider.GetProjectPath''
  hr.(Event HTML)←('WebSocketReceive' 'Handler')(html)
  hr.(Posn Size)←(10 10)(60 30)
  ⎕DQ'hr'
