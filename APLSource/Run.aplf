@@ -1,8 +1,5 @@
  Run dev;dir
  :If dev
-     dir←CiderConfig.HOME
-     LoadHTML dir
-     LoadKeymaps dir
-     LoadSnippets dir
+   DevSetup
  :EndIf
  GUI.Run
