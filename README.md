@@ -2,11 +2,26 @@
 Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 
 ## Usage
-1. Obtain the URL for the latest release workspace fromt the [Releases page](https://github.com/rikedyp/APLAutoHotKey/releases) and import APLAutoHotKey:
+APLAutoHotKey is available as an executable (.exe), Dyalog workspace (.dws) for version 18.2 or later and the source is a `]LINK`-able namespace.
+
+### GUI
+
+#### Executable
+Download the latest release zip from the [Releases page](https://github.com/rikedyp/APLAutoHotKey/releases), unzip it and double click on **APLAutoHotKey.exe**.
+
+#### Workspace
+`)LOAD` or double-click on the workspace file to launch the GUI application.
+
+### API
+The following demonstrates how to use the API to generate scripts programmatically.
+
+1. Import APLAutoHotKey using `]Get`:
 
   ```
-   ]Get -t=APLAutoHotKey -u https://github.com/rikedyp/APLAutoHotKey/releases/download/v0.0.0/APLAutoHotKey-0.0.0.dws
+   ]Get -u https://github.com/rikedyp/APLAutoHotKey/releases/download/v0.1.0/APLAutoHotKey.dws
   ```
+
+> `]Get` can accept a local file path, the URL of a released .dws workspace or the URL of this GitHub repository if you intend to use the development version
 
 2. Set options
 
@@ -17,10 +32,10 @@ Application to generate AutoHotKey scripts to enable APL glyph keyboard input
    opt.outpath←'/tmp/APL-en_GB-CapsLockAlt.ahk'
   ```
   
-3. Build script
+3. Generate and save the script
 
   ```
-         APLAutoHotKey.Build opt
+         APLAutoHotKey.MakeScript opt
    ┌─┬──────────────────────────────────────────────────┐
    │0│Saved: /tmp/APL-en_GB-CapsLockAlt.ahk (9404 bytes)│
    └─┴──────────────────────────────────────────────────┘
@@ -31,10 +46,24 @@ Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 - [ ] Test individual options
 - [ ] Test combinations of options
 - [ ] Suspend key combination + suspend when Classic window active
+- [ ] Option to disable caps lock behaviour
+- [ ] Option to save script to user startup folder
+- [ ] More useful reporting of FILE errors
 
 ## Options
 
 ### Layouts
+Each script is based on a single locale. 
+
+|locale|code|
+|---|---|
+|English (UK)|en_GB|
+|English(US)|en_US|
+|Danish|da_DK|
+|German (Germnay)|de_DE|
+|Spanish (Spain)|es_ES|
+|French (France)|fr_FR|
+
 - [x] en_GB
 - [x] en_US
 - [x] da_DK
@@ -77,3 +106,18 @@ If a Control (<kbd>Ctrl</kbd>) key is used as the APL shifting key, Dyalog Class
 The build script checks the Microsoft Windows registry for installations of Dyalog Classic interpreters, and adds the paths to their executable files to the "Classic" group. When a Classic window is active, hotkeys suspend to allow classic.
 
 If a user installs a Dyalog Classic interpreter, then they can either rebuild their script using APLAutoHotKey, or add the path to the executable file in an additional `GroupAdd` line in their script.
+
+## Development
+This application is developed as a [Cider](https://github.com/aplteam/Cider) project.
+
+Open the project:
+
+```
+]CIDER.OpenProject /path/to/APLAutoHotKey
+```
+
+Build a new release executable and workspace:
+
+```
+]CIDER.Make
+```
