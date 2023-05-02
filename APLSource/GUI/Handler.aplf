@@ -14,7 +14,7 @@
          script←##.GenerateScript opts
          FileName←{'APL-',⍵.locale,'-',(⊃,/⍵.shifts),'.ahk'}
          filename←FileName opts
-         dir←opts.outpath ⍝⊃1 ⎕NPARTS''
+         dir←opts.outpath,'\' ⍝⊃1 ⎕NPARTS''
          script ⎕NPUT(dir,filename)1
          message←'Saved: ',dir,filename
          id∘Send 1 ⎕JSON(0 message)
