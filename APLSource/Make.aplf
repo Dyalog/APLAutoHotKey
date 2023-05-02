@@ -1,17 +1,34 @@
  Make
 ⍝ Save application as .dws workspace
- ⎕CS #
- ⎕SE.Cider.(project_dir←GetProjectPath'')
- ⎕WSID←⎕SE.Cider.project_dir,'/build/APLAutoHotKey-',APLAutoHotKey.version,'.dws'
- APLAutoHotKey.LoadKeymaps ⎕SE.Cider.project_dir
- APLAutoHotKey.LoadSnippets ⎕SE.Cider.project_dir
- '#'⎕NS'APLAutoHotKey.'∘,¨APLAutoHotKey.⎕NL-⍳9
- ⎕EX'APLAutoHotKey'
- ⎕LX←' ''Welcome to APLAutoHotKey'' '
- ⎕SE.Cider.CloseProject ⎕SE.Cider.project_dir
+ apl_version←2⊃'.'⎕WG'APLVersion'
+ apl_minor←apl_version/⍨2>+\'.'=apl_version
+ :If apl_minor≢CiderConfig.USER.APLVersion
+     ('Please build APLAutoHotKey with Dyalog version ',CiderConfig.USER.APLVersion)⎕SIGNAL 10
+ :EndIf
+
+⍝ ⎕SE.Cider.CloseProject ⎕SE.Cider.project_dir
+ ⎕WSID←CiderConfig.HOME,'/build/APLAutoHotKey.dws'
  ⎕TKILL ⎕TNUMS
  ⎕SAVE ⎕WSID
- names←⎕NL-⍳9
- ⎕EX names,⊂'names'
- ⎕SE.Cider.OpenProject ⎕SE.Cider.project_dir
- ⎕EX'⎕SE.Cider.project_dir'
+ ⎕←'Application workspace saved to: ',⎕WSID
+⍝ ⎕SE.Cider.OpenProject ⎕SE.Cider.project_dir
+⍝ ⎕EX'⎕SE.Cider.project_dir'
+
+⍝ Save application as Windows executable and copy HTMLRenderer files
+ filename←CiderConfig.HOME,'/build/exe/APLAutoHotKey.exe'
+ type←'StandaloneNativeExe'
+ flags←8   ⍝ Bound Runtime Exe
+ ⎕LX←'#.APLAutoHotKey.Run'
+ 2 ⎕NQ #'Bind'filename type flags'' '' ''
+ ⎕←'Built application to: ',filename
+ (files folders)←CiderConfig.USER.HTMLRenderer.(files folders)
+ dyalog←'\',⍨2 ⎕NQ #'GetEnvironment' 'DYALOG'
+ from←dyalog∘,¨files,folders
+ to←CiderConfig.HOME,'/build/exe/'
+ Copy←(⎕NCOPY ⎕OPT'IfExists' 'Skip')⍨
+ from Copy to
+ ⎕←'HTMLRenderer and .NET Framework files copied to: ',CiderConfig.HOME,'/build/exe'
+
+
+
+ ⍝
