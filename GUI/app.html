@@ -15,8 +15,10 @@
 				color: red;
 				font-family: monospace;
 				white-space: pre;
+				text-align: left;
 			}
 			#save { width: 50%; }
+			#output { margin-left: 6em; }
 		</style>
 
 		<script>
@@ -106,7 +108,8 @@
 					<label for="AltGr">AltGr</label>
 				  </div>
 			</fieldset>
-		</input>
+			<label for="outpath">Save script to directory:</label>
+			<input type="text" name="outpath" id="outpath" placeholder="C:\tmp" value="C:\tmp">
 		</form>
 		<button name="save" id="save" onclick="saveScript()">Generate Script</button>
 		<div id="output"></div>

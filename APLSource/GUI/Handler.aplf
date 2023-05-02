@@ -1,6 +1,7 @@
- req←Handler arg;gui;evt;data;en;msg;opts;os;as;script;nl;number;expression;message;filename;OutPath;dir;id
+ req←Handler arg;gui;evt;data;en;msg;opts;os;as;script;nl;number;expression;message;filename;dir;id;FileName
  (gui evt id data en msg)←arg
- ⎕←'Handlin'' it baby'
+ ⍝⎕←'Handlin'' it baby'
+ req←arg
  opts←0 ⎕JSON data
 ⍝ Turn shifting key options into a list of shifts
  os←opts.⎕NL ¯2 ⋄ as←##.ahk_shifts.⎕NL ¯2
@@ -11,10 +12,10 @@
          id∘Send 1 ⎕JSON(1 'Please select at least 1 shifting key')
      :Else
          script←##.GenerateScript opts
-         OutPath←{'APL-',⍵.locale,'-',(⊃,/⍵.shifts),'.ahk'}
-         filename←OutPath opts
-         dir←⊃1 ⎕NPARTS''
-         script ⎕NPUT filename 1
+         FileName←{'APL-',⍵.locale,'-',(⊃,/⍵.shifts),'.ahk'}
+         filename←FileName opts
+         dir←opts.outpath ⍝⊃1 ⎕NPARTS''
+         script ⎕NPUT(dir,filename)1
          message←'Saved: ',dir,filename
          id∘Send 1 ⎕JSON(0 message)
      :EndIf
