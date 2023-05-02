@@ -15,20 +15,20 @@ Download the latest release zip from the [Releases page](https://github.com/rike
 ### API
 The following demonstrates how to use the API to generate scripts programmatically.
 
-1. Import APLAutoHotKey using `]Get`:
+1. Import APLAutoHotKey:
 
   ```
    ]Get -u https://github.com/rikedyp/APLAutoHotKey/releases/download/v0.1.0/APLAutoHotKey.dws
   ```
 
-> `]Get` can accept a local file path, the URL of a released .dws workspace or the URL of this GitHub repository if you intend to use the development version
+> `]Get` can accept a local file path or the URL of a released .dws workspace
 
 2. Set options
 
   ```
    opt←⎕NS⍬
    opt.shifts←'CapsLock' 'RAlt'
-   opt.layout←'en_GB'
+   opt.locale←'en_GB'
    opt.outpath←'/tmp/APL-en_GB-CapsLockAlt.ahk'
   ```
   
