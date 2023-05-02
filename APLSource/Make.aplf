@@ -18,7 +18,7 @@
  filename←CiderConfig.HOME,'/build/exe/APLAutoHotKey.exe'
  type←'StandaloneNativeExe'
  flags←8   ⍝ Bound Runtime Exe
- ⎕LX←'#.APLAutoHotKey.Run'
+ ⎕LX←'#.APLAutoHotKey.Run 0'
  2 ⎕NQ #'Bind'filename type flags'' '' ''
  ⎕←'Built application to: ',filename
  (files folders)←CiderConfig.USER.HTMLRenderer.(files folders)
