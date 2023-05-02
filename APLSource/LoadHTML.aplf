@@ -1,0 +1,2 @@
+ LoadHTML dir
+ GUI.html←⊃⎕NGET dir,'/GUI/app.html'
