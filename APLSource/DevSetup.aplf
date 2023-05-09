@@ -1,5 +1,4 @@
- DevSetup
- dir←CiderConfig.HOME
+ DevSetup dir
  LoadHTML dir
  LoadKeymaps dir
  LoadSnippets dir

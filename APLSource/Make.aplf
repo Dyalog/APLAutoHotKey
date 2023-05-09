@@ -1,20 +1,20 @@
- Make
+ Make;Copy;dyalog;filename;files;flags;folders;from;to;type
+
 ⍝ Save application as .dws workspace
+
  apl_version←2⊃'.'⎕WG'APLVersion'
  apl_minor←apl_version/⍨2>+\'.'=apl_version
  :If apl_minor≢CiderConfig.USER.APLVersion
      ('Please build APLAutoHotKey with Dyalog version ',CiderConfig.USER.APLVersion)⎕SIGNAL 10
  :EndIf
-
-⍝ ⎕SE.Cider.CloseProject ⎕SE.Cider.project_dir
+ APLAutoHotKey.(DevSetup CiderConfig.HOME)
  ⎕WSID←CiderConfig.HOME,'/build/APLAutoHotKey.dws'
  ⎕TKILL ⎕TNUMS
  ⎕SAVE ⎕WSID
  ⎕←'Application workspace saved to: ',⎕WSID
-⍝ ⎕SE.Cider.OpenProject ⎕SE.Cider.project_dir
-⍝ ⎕EX'⎕SE.Cider.project_dir'
 
 ⍝ Save application as Windows executable and copy HTMLRenderer files
+
  filename←CiderConfig.HOME,'/build/exe/APLAutoHotKey.exe'
  type←'StandaloneNativeExe'
  flags←8   ⍝ Bound Runtime Exe
@@ -28,7 +28,3 @@
  Copy←(⎕NCOPY ⎕OPT'IfExists' 'Skip')⍨
  from Copy to
  ⎕←'HTMLRenderer and .NET Framework files copied to: ',CiderConfig.HOME,'/build/exe'
-
-
-
- ⍝

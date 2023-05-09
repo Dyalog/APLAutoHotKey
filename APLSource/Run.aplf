@@ -1,5 +1,5 @@
- Run dev;dir
- :If dev
-   DevSetup
+ Run dir
+ :If 0<≢dir
+     DevSetup dir
  :EndIf
  GUI.Run
