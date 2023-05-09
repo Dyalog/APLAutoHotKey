@@ -2,7 +2,7 @@
 Application to generate AutoHotKey scripts to enable APL glyph keyboard input
 
 ## Usage
-APLAutoHotKey is available as an executable (.exe), Dyalog workspace (.dws) for version 18.2 or later and the source is a `]LINK`-able namespace.
+APLAutoHotKey is available as an executable (.exe), Dyalog workspace (.dws) for version 18.2 or later and the source is a [Cider](https://github.com/aplteam/Cider) project.
 
 ### GUI
 
