@@ -1,4 +1,4 @@
  Send←{
 ⍝ Send WebSocket message ⍵ to HTMLRenderer with ID ⍺
-     hr.WebSocketSend ⍺ ⍵ 1 1
+     _←hr.WebSocketSend ⍺ ⍵ 1 1   ⍝ Shy result to prevent the workspace application from opening the APL session
  }
