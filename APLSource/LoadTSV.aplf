@@ -1,4 +1,5 @@
  LoadTSV←{
+     82≡⎕DR'':0 2⍴''   ⍝ Cannot use Unicode characters with Classic interpreter, but still need to build on it
      opts←⊂'Separator'(⎕UCS 9)
      opts,←⊂'EscapeChar' '\'
      (⎕CSV ⎕OPT opts)⍵
