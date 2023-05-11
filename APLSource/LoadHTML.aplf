@@ -1,2 +1,4 @@
  LoadHTML dir
  GUI.html←⊃⎕NGET dir,'/GUI/app.html'
+ GUI.classic←⊃⎕NGET dir,'/GUI/classic.html'
+ 
