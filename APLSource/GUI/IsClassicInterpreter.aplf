@@ -1,0 +1,2 @@
+r←IsClassicInterpreter
+r←82≡⎕DR''
