@@ -88,9 +88,9 @@ This is a key which, while pressed, enables the input of APL glyphs. For example
 - [x] Left Alt
 - [x] Right Alt
 - [x] Alt (both)
-- [ ] LWin
-- [ ] RWin
-- [ ] Win (both)
+- [x] LWin
+- [x] RWin
+- [x] Win (both)
 - [ ] AltGr
 - [ ] Can translate JS key code into AHK SC scan code?
 
