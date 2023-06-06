@@ -2,5 +2,5 @@
 ⍝ ⍵: project root directory
  'keymaps'⎕NS ⍬
  root←dir,'/keymaps/'
- km←'en_GB' 'en_US' 'da_DK' 'de_DE' 'es_ES' 'fr_FR'
+ km←'en_GB' 'en_US' 'da_DK' 'de_DE' 'es_ES' 'fr_FR' 'it_IT' 'fi_FI' 'sv_SE'
  ⍎¨{'keymaps.',⍵,'←LoadTSV ''',root,⍵,'.tsv'''}¨km
