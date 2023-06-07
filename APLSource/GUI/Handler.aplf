@@ -7,6 +7,8 @@
      opts←as Suspend opts
      opts.outpath←OutPath opts
      (number message)←##.MakeScript opts
+ :Case 19
+     (number message)←1 'You do not have permission to write to this directory'
  :Else
      (number message)←⎕DMX.(EN EM)
  :EndTrap
