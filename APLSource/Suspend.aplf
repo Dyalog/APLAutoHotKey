@@ -3,8 +3,9 @@
 ⍝ ←: snippet to suspend hotkeys with user's hotkey or when classic interpreter window in focus
      0=⍵.⎕NC'suspend':snippets.suspend
      txt←snippets.suspend
-     Esc←('&'⎕R'\\&')
-     Replace←'%SUSPENDKEYS%'⎕R(Esc ⍵.suspend)
+     Esc←('&'⎕R'\\&') ⋄ Join←{⊃(⊣,⍺⍺,⊢)/⍵}
+     sus←Esc' & 'Join ⍵.suspend
+     Replace←'%SUSPENDKEYS%'⎕R sus
      UnComment←~∘(';'/⍨''≢⍵.suspend)
      UnComment Replace snippets.suspend
  }

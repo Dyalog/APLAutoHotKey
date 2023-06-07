@@ -1,0 +1,6 @@
+ OutPath←{
+     op←⍵.outpath
+     op←'\',⍨⍣(~'\/'∊⍨⊃⌽op)⊢op
+     op,←'APL-',⍵.locale,'-',(⊃,/⍵.shift),'.ahk'
+     ('/'⎕R'\\')op
+ }

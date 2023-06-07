@@ -10,7 +10,7 @@
      Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
      AltGr←('AltGr'⎕R'RAlt')
 
-     shifts←Alt Ctrl AltGr ⍵.shifts
+     shifts←Alt Ctrl AltGr ⍵.shift
      script,←⊃,/HotKey∘map¨⊆shifts
 
      script,←AddGroups LocateClassicExes ⍬

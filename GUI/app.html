@@ -37,7 +37,7 @@
 			}
 			/*
 			// File system SaveAs not available in HTMLRenderer,
-			// for now, workaround is to save to current working directory via backend
+			// for now, workaround is to save to chosen directory via backend
 			function download(data, filename, type) {
 				file = new Blob([data], {type: type})
 				a = document.createElement("a")
@@ -53,11 +53,47 @@
 				}, 0)
 			}		
 			*/
+			const keyMap = {
+				20: "CapsLock",
+				16: "Shift",
+				17: "Ctrl",
+				18: "Alt",
+				91: "Win",
+				32: "Space",
+				93: "AppsKey"
+			}
+			suspendKeys = []
+			function showKey(evt) {
+				kc = evt.keyCode
+				console.log(evt)
+				if ( kc in keyMap && !suspendKeys.includes(keyMap[kc]) ) { suspendKeys.push(keyMap[kc]); $("#suspend_out").value = suspendKeys.join() }
+			}
+			function clearSuspendShortcut() { $("#suspend_out").value="" }
+
 			function saveScript () {
 				fd = new FormData($("#userOptions"))
-				opts = JSON.stringify(Object.fromEntries(fd))
-				$("#output").innerHTML = opts
-				send(Object.fromEntries(fd))
+				// TODO get suspend key option from here, unless we can make it a field form value?
+				opts = objectFromForm(fd)
+				$("#output").innerHTML = JSON.stringify(opts)
+				send(opts)
+			}
+
+			function objectFromForm (formData) {
+				// Iterate through form data and place values from elements with names like "key[subKey]" into a nested object structure
+				r = {}
+				fa = [...formData]
+				fa.forEach(e=>{
+					[fk ,v] = e;   // Form Key, Value
+					if ( fk.includes("[") ){
+						k = fk.slice(0,fk.indexOf("["))
+						sk = fk.slice(fk.indexOf("[")+1,-1)
+						if (!r[k]) { r[k] = {} }
+						r[k][sk] = v
+					} else {
+						r[fk] = v
+					}
+				})
+				return r
 			}
 			// TODO
 			// en_GB fix divide!
@@ -86,29 +122,73 @@
 			<fieldset>
 				<legend>Choose your shifting key(s)</legend>
 				<div>
-					<input type="checkbox" name="CapsLock" id="CapsLock" value="CapsLock"></input>
-					<label for="CapsLock">Caps Lock</label>
+					<input type="checkbox" name="shift[CapsLock]" value="CapsLock"></input>
+					<label for="shift[CapsLock]">Caps Lock</label>
 				  </div>
 				  <div>
-					<input type="checkbox" name="LAlt" id="LAlt" value="LAlt"></input>
-					<label for="LAlt">Left Alt</label>
+					<input type="checkbox" name="shift[LAlt]" value="LAlt"></input>
+					<label for="shift[LAlt]">Left Alt</label>
 				  </div>
 				  <div>
-					<input type="checkbox" name="RAlt" id="RAlt" value="RAlt"></input>
-					<label for="RAlt">Right Alt</label>
+					<input type="checkbox" name="shift[RAlt]" value="RAlt"></input>
+					<label for="shift[RAlt]">Right Alt</label>
 				  </div>
 				  <div>
-					<input type="checkbox" name="LCtrl" id="LCtrl" value="LCtrl"></input>
-					<label for="LCtrl">Left Control</label>
+					<input type="checkbox" name="shift[LCtrl]" value="LCtrl"></input>
+					<label for="shift[LCtrl]">Left Control</label>
 				  </div>
 				  <div>
-					<input type="checkbox" name="RCtrl" id="RCtrl" value="RCtrl"></input>
-					<label for="RCtrl">Right Control</label>
+					<input type="checkbox" name="shift[RCtrl]" value="RCtrl"></input>
+					<label for="shift[RCtrl]">Right Control</label>
 				  </div>
 				  <div>
-					<input type="checkbox" name="AltGr" id="AltGr" value="AltGr"></input>
-					<label for="AltGr">AltGr</label>
+					<input type="checkbox" name="shift[LWin]" value="LWin"></input>
+					<label for="shift[LWin]">Left Windows key</label>
 				  </div>
+				  <div>
+					<input type="checkbox" name="shift[RWin]" value="RWin"></input>
+					<label for="shift[RWin]">Right Windows key</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="shift[AltGr]" value="AltGr"></input>
+					<label for="shift[AltGr]">AltGr</label>
+				  </div>
+			</fieldset>
+			<fieldset>
+				<legend>Set a shortcut to toggle whether AutoHotKey is active:</legend>
+				<div>
+					<input type="checkbox" name="suspend[CapsLock]" value="CapsLock"></input>
+					<label for="suspend[CapsLock]">Caps Lock</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[LAlt]" value="LAlt"></input>
+					<label for="suspend[LAlt]">Left Alt</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[RAlt]" value="RAlt"></input>
+					<label for="suspend[RAlt]">Right Alt</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[LCtrl]" value="LCtrl"></input>
+					<label for="suspend[LCtrl]">Left Control</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[RCtrl]" value="RCtrl"></input>
+					<label for="suspend[RCtrl]">Right Control</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[LWin]" value="LWin"></input>
+					<label for="suspend[LWin]">Left Windows key</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[RWin]" value="RWin"></input>
+					<label for="suspend[RWin]">Right Windows key</label>
+				  </div>
+				  <div>
+					<input type="checkbox" name="suspend[AltGr]" value="AltGr"></input>
+					<label for="suspend[AltGr]">AltGr</label>
+				  </div>
+				  <p>The selected keys, when pressed together at the same time, will toggle whether AutoHotKey is active.</p>
 			</fieldset>
 			<label for="outpath">Save script to directory:</label>
 			<input type="text" name="outpath" id="outpath" placeholder="C:\tmp" value="C:\tmp">

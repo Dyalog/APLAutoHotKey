@@ -1,0 +1,5 @@
+ Shifts←{
+     0=⍵.⎕NC'shift':'Please select at least 1 shifting key'⎕SIGNAL 1
+     ⍵.shift←⍵.shift.⎕NL ¯2
+     ⍵
+ }
