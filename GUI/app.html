@@ -107,7 +107,7 @@
 	<body>
 		<h1>APLAutoHotKey</h1>
 		<p>Generate AutoHotKey scripts for APL glyph keyboard input</p>
-		<form name="userOptions" id="userOptions">
+		<form name="userOptions" id="userOptions" onkeydown="if (event.key=='Enter'){saveScript(); return false}">
 			<label for="locale">Choose language: </label>
 			<select name="locale">
 				<option value="en_GB">English (UK)</option>     
@@ -155,7 +155,7 @@
 				  </div>
 			</fieldset>
 			<fieldset>
-				<legend>Set a shortcut to toggle whether AutoHotKey is active:</legend>
+				<legend>Set a shortcut to toggle whether AutoHotKey is active (max 2 keys):</legend>
 				<div>
 					<input type="checkbox" name="suspend[CapsLock]" value="CapsLock"></input>
 					<label for="suspend[CapsLock]">Caps Lock</label>
