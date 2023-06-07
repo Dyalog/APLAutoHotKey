@@ -1,5 +1,5 @@
 # APLAutoHotKey
-Application to generate AutoHotKey scripts to enable APL glyph keyboard input
+Application to generate AutoHotKey scripts to enable keyboard input of APL glyphs on Microsoft Windows
 
 ## Usage
 APLAutoHotKey is available as an executable (.exe), Dyalog workspace (.dws) for version 18.2 or later and the source is a [Cider](https://github.com/aplteam/Cider) project.
@@ -27,7 +27,7 @@ The following demonstrates how to use the API to generate scripts programmatical
 
   ```
    opt←⎕NS⍬
-   opt.shifts←'CapsLock' 'RAlt'
+   opt.shift←'CapsLock' 'RAlt'
    opt.locale←'en_GB'
    opt.outpath←'/tmp/APL-en_GB-CapsLockAlt.ahk'
   ```
@@ -40,15 +40,6 @@ The following demonstrates how to use the API to generate scripts programmatical
    │0│Saved: /tmp/APL-en_GB-CapsLockAlt.ahk (9404 bytes)│
    └─┴──────────────────────────────────────────────────┘
   ```
-  
-## TODO
-- [x] Enumerate options
-- [ ] Test individual options
-- [ ] Test combinations of options
-- [ ] Suspend key combination + suspend when Classic window active
-- [ ] Option to disable caps lock behaviour
-- [ ] Option to save script to user startup folder
-- [ ] More useful reporting of FILE errors
 
 ## Options
 
@@ -92,7 +83,6 @@ This is a key which, while pressed, enables the input of APL glyphs. For example
 - [x] RWin
 - [x] Win (both)
 - [ ] AltGr
-- [ ] Can translate JS key code into AHK SC scan code?
 
 > AltGr sends a LCtrl+LAlt signal. AltGr and LAlt can get different behaviours by mapping `<^>!::RAlt` and using `LAlt` and `RAlt`. If both Left Alt and Right Alt are selected, then a single `Alt` hotkey is used, but if only Left Alt is selected, then `AltGr` must be remapped to `RAlt`. TODO: does this affect e.g. accents or special characters via AltGr on regular Windows keyboard?
 > Use of `LCtrl`, `Ctrl`, `RAlt` or `Alt` can interfere with `AltGr` behaviour
