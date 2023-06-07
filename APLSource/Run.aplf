@@ -1,5 +1,9 @@
- Run dir
- :If 0<≢dir
-     DevSetup dir
+ Run dev
+⍝ dev 1=do not trap errors, 2=trap errors
+ :If dev>0
+     DevSetup CiderConfig.HOME
+     GUI.dev←2-dev
+ :Else
+     GUI.dev←0
  :EndIf
  GUI.Run

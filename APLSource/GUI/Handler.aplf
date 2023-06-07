@@ -1,13 +1,13 @@
  req←Handler req;gui;evt;data;en;msg;opts;os;as;script;nl;number;message;filename;dir;id;FileName
  (gui evt id data en msg)←req
- :Trap 0
+ :Trap dev↓0
      opts←0 ⎕JSON data
-     os←opts.⎕NL ¯2 ⋄ as←##.ahk_shifts.⎕NL ¯2   ⍝ Turn shifting key options into a list of shifts
-     opts.shifts←os∩as
-     (number expression)←BuildSaveScript opts		 
+     as←##.ahk_shifts.⎕NL ¯2   ⍝ Available keys for shift and suspend
+     opts←as Shifts opts
+     opts←as Suspend opts
+     opts.outpath←OutPath opts
+     (number message)←##.MakeScript opts
  :Else
-     nl←⎕UCS 10
-     (number expression)←⎕DMX.(EN DM)
-     expression←1↓∊nl∘,¨expression
+     (number message)←⎕DMX.(EN EM)
  :EndTrap
  id∘Send 1 ⎕JSON(number message)
