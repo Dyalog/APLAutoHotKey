@@ -7,7 +7,7 @@
  :If apl_minor≢CiderConfig.USER.APLVersion
      ('Please build APLAutoHotKey with Dyalog version ',CiderConfig.USER.APLVersion)⎕SIGNAL 10
  :EndIf
- APLAutoHotKey.(DevSetup CiderConfig.HOME)
+ #.APLAutoHotKey.(DevSetup CiderConfig.HOME)
  ⎕WSID←CiderConfig.HOME,'/build/APLAutoHotKey.dws'
  ⎕TKILL ⎕TNUMS
  ⎕SAVE ⎕WSID
