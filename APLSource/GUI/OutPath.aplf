@@ -1,6 +1,10 @@
- OutPath←{
-     op←⍵.outpath
-     op←'\',⍨⍣(~'\/'∊⍨⊃⌽op)⊢op
-     op,←'APL-',⍵.locale,'-',(⊃,/⍵.shift),'.ahk'
-     ('/'⎕R'\\')op
- }
+OutPath←{
+⍝ ⍺: char vec :: directory path
+⍝ ⍵: options namespace
+⍝ ←: options namespace with .ahk outfile fully qualified file path
+    dir←'\',⍨⍣(~'\/'∊⍨⊃⌽⍺)⊢⍺
+    of←('/'⎕R'\\') dir,OutFile ⍵
+    0=⍵.⎕NC'outfile':of{⍵.outfile←⊂⍺ ⋄ ⍵}⍵   ⍝ Create outfile if not exists
+    ⍵.outfile,←⊂of                           ⍝ Otherwise append outfile
+    ⍵
+}

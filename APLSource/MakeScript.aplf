@@ -1,9 +1,10 @@
- MakeScript←{
+MakeScript←{
 ⍝ ⍵ ←→ Options JSON Object
 ⍝ ← ←→ (Error number)(Error message)
 
-     script←GenerateScript ⍵
-     b←script ⎕NPUT ⍵.outpath 1
-     0('Saved: ',⍵.outpath,' (',(⍕b),' bytes)')
+    script←GenerateScript ⍵
+    b←script∘SaveScript¨⊆⍵.outfile
+    Saved←{'Saved: ',⍵,' (',(⍕⍺),' bytes)<br>'}
+    0(⊃(⊣,'<br>',⊢)/b Saved¨⊆⍵.outfile)
 
- }
+}

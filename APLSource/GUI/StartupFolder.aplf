@@ -1,0 +1,9 @@
+StartupFolder←{
+⍝ ⍵: options namespace
+⍝ ←: options namespace with startup folder (or nothing) appended to outfile
+    ⎕using←'' 'System'
+    user←System.Environment.(GetFolderPath SpecialFolder.Startup)
+    all←System.Environment.(GetFolderPath SpecialFolder.CommonStartup)
+    startup←('user' 'all'⍳⊂⍵.startup)⊃(user all '')
+    startup OutPath ⍵
+}
