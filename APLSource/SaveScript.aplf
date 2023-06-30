@@ -1,0 +1,3 @@
+size←script SaveScript path;overwrite
+overwrite←1
+size←script ⎕NPUT path overwrite

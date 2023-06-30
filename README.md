@@ -1,6 +1,20 @@
 # APLAutoHotKey
 Application to generate AutoHotKey scripts to enable keyboard input of APL glyphs on Microsoft Windows
 
+- [Usage](#usage)
+	- [GUI](#gui)
+		- [Executable](#executable)
+		- [Workspace](#workspace)
+	- [API](#api)
+- [Options](#options)
+	- [Layouts](#layouts)
+	- [Shifting key](#shifting-key)
+	- [Suspend shortcut](#suspend-shortcut)
+	- [Launch at startup](#launch-at-startup)
+- [Dyalog Classic Edition](#dyalog-classic-edition)
+- [Development](#development)
+	- [Mapping dead keys](#mapping-dead-keys)
+
 ## Usage
 APLAutoHotKey is available as an executable (.exe), Dyalog workspace (.dws) for version 18.2 or later and the source is a [Cider](https://github.com/aplteam/Cider) project.
 
@@ -87,10 +101,13 @@ This is a key which, while pressed, enables the input of APL glyphs. For example
 > AltGr sends a LCtrl+LAlt signal. AltGr and LAlt can get different behaviours by mapping `<^>!::RAlt` and using `LAlt` and `RAlt`. If both Left Alt and Right Alt are selected, then a single `Alt` hotkey is used, but if only Left Alt is selected, then `AltGr` must be remapped to `RAlt`. TODO: does this affect e.g. accents or special characters via AltGr on regular Windows keyboard?
 > Use of `LCtrl`, `Ctrl`, `RAlt` or `Alt` can interfere with `AltGr` behaviour
 
-### Suspend
+### Suspend shortcut
 The user may specify a key combination to toggle suspension of hotkeys, which may be useful if an application uses keyboard shortcuts with which the hotkeys interfere.
 
-#### Dyalog Classic Edition
+### Launch at startup
+The script can be made to launch at startup by placing it into the user's or the common startup folder. The GUI application will do this for the current user if the **Launch at startup** option is set to **This user only**, or for all users on the system if it is set to **All users**.
+
+## Dyalog Classic Edition
 If a Control (<kbd>Ctrl</kbd>) key is used as the APL shifting key, Dyalog Classic interpreters fail to register keyboard input for APL glyphs while the hotkeys are active. This is avoided by suspending AutoHotKey while Dyalog Classic interpreter windows are active.
 
 The build script checks the Microsoft Windows registry for installations of Dyalog Classic interpreters, and adds the paths to their executable files to the "Classic" group. When a Classic window is active, hotkeys suspend to allow classic.

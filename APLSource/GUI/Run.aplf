@@ -2,5 +2,5 @@
  hr←⎕NEW⊂'HTMLRenderer'
  html←(1+IsClassicInterpreter)⊃(html classic)
  hr.(Event HTML)←('WebSocketReceive' 'Handler')(html)
- hr.(Posn Size)←(10 10)(90 45)
+ hr.(Posn Size)←(1 10)(95 45)
  ⎕DQ'hr'

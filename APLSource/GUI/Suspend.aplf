@@ -1,4 +1,6 @@
  Suspend←{
+⍝ ⍵: options namespace
+⍝ ←: options namespace with API-ready suspend option
      0=⍵.⎕NC'suspend':⍵
      2<≢sus←⍵.suspend.⎕NL ¯2:'Maximum of 2 keys allowed in suspend shortcut'⎕SIGNAL 1
      ⍵.suspend←sus
