@@ -35,7 +35,7 @@ Additional characters are accessed using Alt Gr:
 │Ctrl   │Win  │Alt   │                          │Alt Gr│Win   │Menu │Ctrl  │
 │       │     │      │                          │      │      │     │      │
 └───────┴─────┴──────┴──────────────────────────┴──────┴──────┴─────┴──────┘
-More additional characters are available using Alt Gr on the Finnish with Sami keyboard
+More additional characters are available using Alt Gr on the Finnish with Sami keyboard:
 ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬─────────┐
 │    │!   │"   │#   │⊢   │%   │&   │/   │(   │)   │=   │?   │    │Backspace│
 │§   │1   │2 @ │3 £ │4 $ │5 € │6   │7 { │8 [ │9 ] │0 } │+ \ │' ´ │         │
