@@ -3,6 +3,7 @@
 	<head>
 		<style>
 			body { text-align: center; }
+			#version { font-size: 0.6em; }
 			form {
 				text-align: left;
 				display: flex;
@@ -105,7 +106,7 @@
 		</script>
 	</head>
 	<body>
-		<h1>APLAutoHotKey</h1>
+		<h1>APLAutoHotKey <span id="version">v0.3.0</span></h1>
 		<p>Generate AutoHotKey scripts for APL glyph keyboard input</p>
 		<form name="userOptions" id="userOptions" onkeydown="if (event.key=='Enter'){saveScript(); return false}">
 			<label for="locale">Choose language: </label>

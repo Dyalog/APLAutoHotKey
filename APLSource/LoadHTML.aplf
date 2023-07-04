@@ -1,4 +1,5 @@
  LoadHTML dir
- GUI.html←⊃⎕NGET dir,'/GUI/app.html'
+ span←'<span id="version"></span>'
+ vspan←'<span id="version">v',version,'</span>'
+ GUI.html←(span ⎕R vspan)⊃⎕NGET dir,'/GUI/app.html'
  GUI.classic←⊃⎕NGET dir,'/GUI/classic.html'
- 
