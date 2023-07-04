@@ -1,10 +1,11 @@
- Make;Copy;dir;dyalog;filename;files;flags;folders;from;to;type;build;exe
+ Make;Copy;dir;dyalog;filename;files;flags;folders;from;to;type;build;exe;create
 
 ⍝ Create build folders
 
  build←CiderConfig.HOME,'/build'
  exe←build,'/exe'
- ⎕mkdir¨build exe
+ create←0=⎕NEXISTS build exe
+ ⎕MKDIR create/build exe
 
 ⍝ Save application as .dws workspace
 
