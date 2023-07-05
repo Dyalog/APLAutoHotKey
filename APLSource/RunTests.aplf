@@ -1,33 +1,44 @@
- r←RunTests all
- project_dir←⎕SE.Cider.GetProjectPath''
- OutPath←{project_dir,'/build/','APL-',⍵.layout,'-',(⊃,/⍵.shifts),'.ahk'}
- LoadKeymaps project_dir
- LoadSnippets project_dir
+r←RunTests all
+project_dir←⎕SE.Cider.GetProjectPath''
+OutFile←{project_dir,'/build/scripts/','APL-',⍵.locale,'-',(⊃,/⍵.shift),'.ahk'}
+LoadKeymaps project_dir
+LoadSnippets project_dir
 
- :If ~all
-     opts←⎕NS ⍬
-     opts.layout←'en_GB'
-     opts.shifts←'CapsLock' 'AltGr'
-     opts.suspend←'LControl & Space'
-     opts.outpath←OutPath opts
+:If ~all
+    opts←⎕NS ⍬
+    opts.layout←'en_GB'
+    opts.shift←'CapsLock' 'AltGr'
+    opts.suspend←'LControl' 'Space'
+    opts.outfile←OutFile opts
 
-     r←MakeScript opts
+    r←MakeScript opts
 
- :Else
+:Else
 
-     shifts←'CapsLock' 'LCtrl' 'RCtrl' 'LAlt' 'RAlt'
-     combos←∪∪¨,∘.(,⍥⊆)⍣2⍨shifts   ⍝ Up to 3 shifting keys
-     layouts←'en_GB' 'en_US' 'da_DK' 'de_DE' 'es_ES' 'fr_FR'
+    Assert ← {⍺←'assertion failure' ⋄ 0∊⍵:⍺ ⎕SIGNAL 8 ⋄ shy←0}
 
-     MakeOpts←{
-         o←⎕NS ⍬
-         o.layout←⍺
-         o.shifts←⍵
-         o.suspend←'LCtrl & Space'
-         o.outpath←OutPath o
-         o
-     }
+⍝ Check no duplicate HotKeys
+    Assert ∧/{∧/≠⊣/⍵}¨keymaps∘⍎¨keymaps.⎕NL ¯2
 
-     r←⍪MakeScript¨,layouts∘.MakeOpts combos
+⍝ Generate a bunch of scripts
+    build ← project_dir,'/build'
+    scripts ← build,'/scripts'
+    mkdir←0=⎕nexists¨build scripts
+    ⎕mkdir mkdir/build scripts
 
- :EndIf
+    shifts←'CapsLock' 'LCtrl' 'RCtrl' 'LAlt' 'RAlt'
+    combos←∪∪¨,∘.(,⍥⊆)⍣2⍨shifts   ⍝ Up to 3 shifting keys
+    layouts←'en_GB' 'en_US' 'da_DK' 'de_DE' 'es_ES' 'fr_FR'
+
+    MakeOpts←{
+        o←⎕NS ⍬
+        o.locale←⍺
+        o.shift←⍵
+        o.suspend←'LCtrl' 'Space'
+        o.outfile←OutFile o
+        o
+    }
+
+    r←⍪MakeScript¨,layouts∘.MakeOpts combos
+
+:EndIf
