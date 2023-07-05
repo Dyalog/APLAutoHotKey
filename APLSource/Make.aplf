@@ -1,38 +1,23 @@
- Make;Copy;dir;dyalog;filename;files;flags;folders;from;to;type;build;exe;create
+Make;Copy;apl_minor;apl_version;build;create;dir;dyalog;exe;filename;files;flags;folders;from;to;type
 
 ⍝ Create build folders
 
- build←CiderConfig.HOME,'/build'
- exe←build,'/exe'
- create←0=⎕NEXISTS build exe
- ⎕MKDIR create/build exe
+build←CiderConfig.HOME,'/build'
+exe←build,'/exe'
+create←0=⎕NEXISTS build exe
+⎕MKDIR create/build exe
 
 ⍝ Save application as .dws workspace
 
- apl_version←2⊃'.'⎕WG'APLVersion'
- apl_minor←apl_version/⍨2>+\'.'=apl_version
- :If apl_minor≢CiderConfig.USER.APLVersion
-     ('Please build APLAutoHotKey with Dyalog version ',CiderConfig.USER.APLVersion)⎕SIGNAL 10
- :EndIf
+apl_version←2⊃'.'⎕WG'APLVersion'
+apl_minor←apl_version/⍨2>+\'.'=apl_version
+:If apl_minor≢CiderConfig.USER.APLVersion
+    ('Please build APLAutoHotKey with Dyalog version ',CiderConfig.USER.APLVersion)⎕SIGNAL 10
+:EndIf
 
- #.APLAutoHotKey.(DevSetup CiderConfig.HOME)
- ⎕WSID←build,'/APLAutoHotKey.dws'
- ⎕TKILL ⎕TNUMS
- ⎕SAVE ⎕WSID
- ⎕←'Application workspace saved to: ',⎕WSID
-
-⍝ Save application as Windows executable and copy HTMLRenderer files
-
- filename←exe,'/APLAutoHotKey.exe'
- type←'StandaloneNativeExe'
- flags←8   ⍝ Bound Runtime Exe
- ⎕LX←'#.APLAutoHotKey.Run 0'
- 2 ⎕NQ'.' 'Bind'filename type flags'' '' ''
- ⎕←'Built application to: ',filename
- (files folders)←CiderConfig.USER.HTMLRenderer.(files folders)
- dyalog←'\',⍨2 ⎕NQ #'GetEnvironment' 'DYALOG'
- from←dyalog∘,¨files,folders
- to←CiderConfig.HOME,'/build/exe/'
- Copy←(⎕NCOPY ⎕OPT'IfExists' 'Skip')⍨
- from Copy to
- ⎕←'HTMLRenderer and .NET Framework files copied to: ',CiderConfig.HOME,'/build/exe'
+DevSetup CiderConfig.HOME
+⎕LX←'#.APLAutoHotKey.Run 0'
+⎕WSID←build,'/APLAutoHotKey.dws'
+⎕TKILL ⎕TNUMS
+⎕SAVE ⎕WSID
+⎕←'Application workspace saved to: ',⎕WSID
