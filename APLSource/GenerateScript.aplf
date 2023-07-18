@@ -4,7 +4,9 @@
 ⍝ ⍵.shifts    ←→ (2=≡)(char) :: shifting key(s)
 
      map←keymaps⍎⍵.locale
-     script←'user_suspend := False',⎕UCS 10
+	 nl ← ⎕UCS 10
+	 script ←'#Requires AutoHotKey v2.0-',nl
+     script,←'user_suspend := False',nl
 
      Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
      Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
