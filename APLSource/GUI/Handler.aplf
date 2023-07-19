@@ -5,8 +5,8 @@ req←Handler req;gui;evt;data;en;msg;opts;os;as;script;nl;number;message;filena
     as←##.ahk_shifts.⎕NL ¯2   ⍝ Available keys for shift and suspend
     opts←as Shifts opts
     opts←as Suspend opts
-    opts←opts.outpath OutPath opts
-    opts←StartupFolder opts
+    opts←opts.outpath ##.OutPath opts
+    opts←##.StartupFolder opts
     (number message)←##.MakeScript opts
 :Case 19
     (number message)←1 ('You do not have permission to write to this directory<br><br>',⎕DMX.Message)

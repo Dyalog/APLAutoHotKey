@@ -1,23 +1,23 @@
- GenerateScript←{
+GenerateScript←{
 ⍝ ⍵ ←→ options JSON namespace. All members (1≥≢⍴)
 ⍝ ⍵.layout    ←→ (1=≡)(char) :: name of .tsv file which maps ASCII glyphs to APL glyphs
 ⍝ ⍵.shifts    ←→ (2=≡)(char) :: shifting key(s)
 
-     map←keymaps⍎⍵.locale
-	 nl ← ⎕UCS 10
-	 script ←'#Requires AutoHotKey v2.0-',nl
-     script,←'user_suspend := False',nl
+    map←keymaps⍎⍵.locale
+    nl ← ⎕UCS 10
+    script ←'#Requires AutoHotKey v2.0-',nl
+    script,←'user_suspend := False',nl
 
-     Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
-     Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
-     AltGr←('AltGr'⎕R'RAlt')
+    Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
+    Ctrl←('Ctrl'ReplaceForBoth'LCtrl' 'RCtrl')
+    AltGr←('AltGr'⎕R'RAlt')
 
-     shifts←Alt Ctrl AltGr ⍵.shift
-     script,←⊃,/HotKey∘map¨⊆shifts
+    shifts←Alt Ctrl AltGr ⍵.shift
+    script,←⊃,/HotKey∘map¨⊆shifts
 
-     script,←AddGroups LocateClassicExes ⍬
-     script,←Suspend ⍵
+    script,←AddGroups LocateClassicExes
+    script,←Suspend ⍵
 
-     script
+    script
 
- }
+}
