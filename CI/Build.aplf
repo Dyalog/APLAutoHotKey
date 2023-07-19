@@ -1,0 +1,3 @@
+Build
+⎕SE.UCMD'DBuild APLAutoHotKey.dyalogbuild -save'
+⎕OFF
