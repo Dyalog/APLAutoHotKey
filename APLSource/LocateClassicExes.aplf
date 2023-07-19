@@ -1,10 +1,12 @@
- LocateClassicExes←{
-⍝ Requires .NET Framework OR https://www.nuget.org/packages/Microsoft.Windows.Compatibility
-     ⎕USING←'Microsoft.Win32'
-     dyalog←Registry.CurrentUser.OpenSubKey'SOFTWARE\Dyalog' 1
-     versions←dyalog.GetSubKeyNames
-     classic←('Dyalog APL/W(-64)? [0-9]+.[0-9]$'⎕S'&')versions
-     reg_path←(⍕dyalog)∘,¨'\',¨classic
-     exe_path←{Registry.GetValue ⍵'dyalog' ''}¨reg_path
-     ,∘'dyalog.exe'¨exe_path,¨'\'
- }
+exe_path←LocateClassicExes;classic;dyalog;installed;reg_path
+⍝ Uses APLTeam WinReg utility https://tatin.dev/v1/packages/major_versions/aplteam-WinReg
+dyalog←'SOFTWARE\Dyalog'
+:if ~WinReg.DoesKeyExist dyalog
+    exe_path←''
+:else
+    installed←WinReg.GetAllSubKeyNames dyalog
+    classic←installed⌿⍨'Dyalog APL/W'∘(⊃⍷)¨installed
+    reg_path←dyalog∘,¨'\',¨classic
+    exe_path←WinReg.GetValue¨reg_path,¨⊂'\dyalog'
+    exe_path,¨←⊂'\dyalog.exe'
+:endif
