@@ -1,6 +1,9 @@
  Run
  hr←⎕NEW⊂'HTMLRenderer'
- html←(1+IsClassicInterpreter)⊃(html classic)
- hr.(Event HTML)←('WebSocketReceive' 'Handler')(html)
+ hr.onWebSocketReceive←'HandleWSReceive'
+ hr.onHTTPRequest←'HandleHTTPRequest'
+ hr.InterceptedURLs⍪←↑('/app.css' 1)('/app.js' 1)
+ html←(1+IsClassicInterpreter)⊃(app_html classic)
+ hr.HTML←html
  hr.(Posn Size)←(1 10)(95 45)
  ⎕DQ'hr'

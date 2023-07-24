@@ -1,4 +1,4 @@
  DevSetup dir
- LoadHTML dir
+ LoadGUI dir
  LoadKeymaps dir
  LoadSnippets dir

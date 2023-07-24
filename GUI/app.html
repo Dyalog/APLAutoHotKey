@@ -1,113 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style>
-			body { text-align: center; }
-			#version { font-size: 0.6em; }
-			form {
-				text-align: left;
-				display: flex;
-				flex-direction: column;
-				padding: 1em 5em;
-			}
-			form > * { padding: 0.5em; }
-			label, fieldset { margin-top: 1.5em; }
-			.error {
-				color: red;
-				font-family: monospace;
-				white-space: pre;
-				text-align: left;
-			}
-			#save { width: 50%; }
-			#output { margin-left: 6em; }
-		</style>
-
-		<script>
-			$ = s => document.querySelector(s)
-			const ws = new WebSocket("ws://dyalog_root/")
-			const send = data => { ws.send(JSON.stringify(data)) }
-			ws.onmessage = function(data) {
-				// data: (error number)(message)
-				result = JSON.parse(data.data)
-				errorNumber = result[0]
-				let p = document.createElement("p")
-				p.innerHTML = result[1]
-				if ( 0 !== errorNumber ) { p.classList.add("error") }
-				$("#output").innerHTML=""
-				$("#output").appendChild(p)
-			}
-			/*
-			// File system SaveAs not available in HTMLRenderer,
-			// for now, workaround is to save to chosen directory via backend
-			function download(data, filename, type) {
-				file = new Blob([data], {type: type})
-				a = document.createElement("a")
-				url = URL.createObjectURL(file)
-				a.href = url
-				a.innerHTML = "download"
-				a.download = filename
-				document.body.appendChild(a)
-				a.click()
-				setTimeout(function() {
-					document.body.removeChild(a)
-					window.URL.revokeObjectURL(url)
-				}, 0)
-			}		
-			*/
-			const keyMap = {
-				20: "CapsLock",
-				16: "Shift",
-				17: "Ctrl",
-				18: "Alt",
-				91: "Win",
-				32: "Space",
-				93: "AppsKey"
-			}
-			suspendKeys = []
-			function showKey(evt) {
-				kc = evt.keyCode
-				console.log(evt)
-				if ( kc in keyMap && !suspendKeys.includes(keyMap[kc]) ) { suspendKeys.push(keyMap[kc]); $("#suspend_out").value = suspendKeys.join() }
-			}
-			function clearSuspendShortcut() { $("#suspend_out").value="" }
-
-			function saveScript () {
-				fd = new FormData($("#userOptions"))
-				// TODO get suspend key option from here, unless we can make it a field form value?
-				opts = objectFromForm(fd)
-				$("#output").innerHTML = JSON.stringify(opts)
-				send(opts)
-			}
-
-			function objectFromForm (formData) {
-				// Iterate through form data and place values from elements with names like "key[subKey]" into a nested object structure
-				r = {}
-				fa = [...formData]
-				fa.forEach(e=>{
-					[fk ,v] = e;   // Form Key, Value
-					if ( fk.includes("[") ){
-						k = fk.slice(0,fk.indexOf("["))
-						sk = fk.slice(fk.indexOf("[")+1,-1)
-						if (!r[k]) { r[k] = {} }
-						r[k][sk] = v
-					} else {
-						r[fk] = v
-					}
-				})
-				return r
-			}
-			// TODO
-			// en_GB fix divide!
-			// Control warn about common shortcuts
-			// Alt warn about menu items
-			// Left Ctrl and Right Alt ≡ AltGr
-			// Right Alt on AltGr keyboards means both Alt keys
-			// Caps Lock option to disable CapsLock behaviour
-		</script>
+		<script src="./app.js"></script>
+		<link rel="stylesheet" href="./app.css">
 	</head>
 	<body>
 		<h1>APLAutoHotKey <span id="version"></span></h1>
-		<p>Generate AutoHotKey scripts for APL glyph keyboard input</p>
+		<p>Generate AutoHotKey scripts for APL glyph keyboard input</p>		
 		<form name="userOptions" id="userOptions" onkeydown="if (event.key=='Enter'){saveScript(); return false}">
 			<label for="locale">Choose language: </label>
 			<select name="locale">
