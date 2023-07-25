@@ -1,15 +1,24 @@
 $ = s => document.querySelector(s)
 const ws = new WebSocket("ws://dyalog_root/")
 const send = data => { ws.send(JSON.stringify(data)) }
+
 ws.onmessage = function(data) {
-	// data: (error number)(message)
+	// data: [event number, message]
 	result = JSON.parse(data.data)
-	errorNumber = result[0]
-	let p = document.createElement("p")
-	p.innerHTML = result[1]
-	if ( 0 !== errorNumber ) { p.classList.add("error") }
-	$("#output").innerHTML=""
-	$("#output").appendChild(p)
+	eventNumber = result[0]
+	let div = document.createElement("div")
+	div.innerHTML = result[1]
+	switch (eventNumber) {
+		case 0:
+			showModal(div)
+			break;
+		case 400:
+			div.classList.add("error")
+			showModal(div)
+			break;
+		default:
+			showModal(div)
+	}
 }
 
 function saveScript () {
@@ -17,11 +26,12 @@ function saveScript () {
 	// TODO get suspend key option from here, unless we can make it a field form value?
 	opts = objectFromForm(fd)
 	$("#output").innerHTML = JSON.stringify(opts)
-	send(opts)
+	send(["makeScript", opts])
 }
 
 function objectFromForm (formData) {
 	// Iterate through form data and place values from elements with names like "key[subKey]" into a nested object structure
+	// key[subKey] becomes {key: {subKey: "value"}}
 	r = {}
 	fa = [...formData]
 	fa.forEach(e=>{
@@ -38,23 +48,26 @@ function objectFromForm (formData) {
 	return r
 }
 
-function showModal(html) {
+function showModal(el) {
+	// Display modal window with el as content
 	modal = document.createElement("div")
 	modal.classList.add("modal")
-	content = document.createElement("div")
+	const content = document.createElement("div")
 	content.classList.add("modal-content")
-	content.innerHTML = html
+	content.appendChild(el)
 	modal.appendChild(content)
-	button = document.createElement("button")
-	button.innerHTML = "close"
-	button.onclick = function() {modal.style.display = "none"}
+	const button = document.createElement("button")	
+	button.innerHTML = "Close"
+	button.onclick = function() { modal.style.display = "none" }	
 	content.appendChild(button)
 	document.body.appendChild(modal)
+	window.addEventListener("click", hideModal)
 }
 
-window.onclick = function(event) {
+function hideModal(event) {
 	if (event.target == modal) { modal.style.display = "none" }
 }
+
 // TODO
 // Control warn about common shortcuts
 // Alt warn about menu items

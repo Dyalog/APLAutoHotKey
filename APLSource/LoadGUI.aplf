@@ -1,7 +1,9 @@
  LoadGUI dir
  span←'<span id="version"></span>'
  vspan←'<span id="version">v',version,'</span>'
- GUI.app_html←(span ⎕R vspan)⊃⎕NGET dir,'/GUI/app.html'
- GUI.app_css ←⊃⎕NGET dir,'/GUI/app.css'
- GUI.app_js  ←⊃⎕NGET dir,'/GUI/app.js'
- GUI.classic ←⊃⎕NGET dir,'/GUI/classic.html'
+ GUI.app_html  ←(span ⎕R vspan)⊃⎕NGET dir,'/GUI/app.html'
+ GUI.app_css   ←⊃⎕NGET dir,'/GUI/app.css'
+ GUI.app_js    ←⊃⎕NGET dir,'/GUI/app.js'
+ GUI.modal_css ←⊃⎕NGET dir,'/GUI/modal.css'
+ GUI.existing_scripts_html ←⊃⎕NGET dir,'/GUI/existing_scripts.html'
+ GUI.classic   ←⊃⎕NGET dir,'/GUI/classic.html'

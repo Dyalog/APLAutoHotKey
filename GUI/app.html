@@ -3,9 +3,11 @@
 	<head>
 		<script src="./app.js"></script>
 		<link rel="stylesheet" href="./app.css">
+		<link rel="stylesheet" href="./modal.css">
 	</head>
 	<body>
 		<h1>APLAutoHotKey <span id="version"></span></h1>
+		<button onclick="showModal('wow')">Click</button>
 		<p>Generate AutoHotKey scripts for APL glyph keyboard input</p>		
 		<form name="userOptions" id="userOptions" onkeydown="if (event.key=='Enter'){saveScript(); return false}">
 			<label for="locale">Choose language: </label>
