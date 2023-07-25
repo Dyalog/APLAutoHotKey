@@ -1,0 +1,9 @@
+dir←GetStartupDir case
+:Select case
+  :Case 'user'
+    dir←WinReg.GetValue'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\Startup'
+  :Case 'all'
+    dir←WinReg.GetValue'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Common Startup'
+  :Else
+    dir←''
+:EndSelect

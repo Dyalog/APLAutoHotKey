@@ -1,17 +1,24 @@
-req←HandleWSReceive req;gui;evt;data;en;msg;opts;os;as;script;nl;number;message;filename;dir;id;FileName
-⎕←'WS REC'
-(gui evt id data en msg)←req
-:Trap dev↓0
-    opts←0 ⎕JSON data
-    as←##.ahk_shifts.⎕NL ¯2   ⍝ Available keys for shift and suspend
-    opts←as Shifts opts
-    opts←as Suspend opts
-    opts←opts.outpath ##.OutPath opts
-    opts←##.StartupFolder opts
-    (number message)←##.MakeScript opts
-:Case 19
-    (number message)←1 ('You do not have permission to write to this directory<br><br>',⎕DMX.Message)
-:Else
-    (number message)←⎕DMX.(EN EM)
-:EndTrap
-id∘Send 1 ⎕JSON(number message)
+ req←HandleWSReceive req;gui;evt;data;en;msg;os;as;script;nl;number;message;filename;dir;id;FileName;action;opts
+⍝ The APL side of the GUI uses event trapping and signalling mechanisms to communicate with the JS side
+⍝ Options for form submission persist between messages in the OPTS namespace
+⍝ 
+ (gui evt id data en msg)←req
+ :Trap dev↓0 19 202 400
+     'OPTS' ⎕NS 0 ⎕JSON data   ⍝ Merge options in persistent store     
+     as←##.ahk_shifts.⎕NL ¯2   ⍝ Available keys for shift and suspend
+     opts←as Shifts opts
+     opts←as Suspend opts
+     opts←OPTS.outpath OutPath opts
+    ⍝ If .ahk scripts exist in Startup folder AND user is saving to startup folder, prompt user to overwrite / delete existing scripts
+     opts←CheckStartupFolder opts
+     (number message)←MakeScript OPTS
+ :Case 19   ⍝ FILE ACCESS ERROR
+     (number message)←1('You do not have permission to write to this directory<br><br>',⎕DMX.Message)
+ :CaseList 202 400
+    ⍝ 202: User input required
+	⍝ 400: Invalid form options
+     (number message)←⎕DMX.(EN EM)
+ :Else      ⍝ ERROR
+     (number message)←⎕DMX.(EN EM)
+ :EndTrap
+ id∘Send 1 ⎕JSON(number message)

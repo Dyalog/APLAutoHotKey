@@ -1,0 +1,10 @@
+ CheckStartupFolder←{
+⍝ ⍵ ←→ GUI options namespace	
+⍝ ← ←→ GUI options namespace with startup directories added to output paths
+     ExistingScripts←{⊃(⎕NINFO ⎕OPT'Wildcard' 1)⍵,'/*.ahk'}
+     r←⍵
+     dir←##.GetStartupDir r.startup
+     exists←ExistingScripts dir
+     0<≢exists:delete_scripts_html ⎕SIGNAL 202
+     r
+ }
