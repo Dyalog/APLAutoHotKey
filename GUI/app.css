@@ -1,0 +1,18 @@
+body { text-align: center; }
+#version { font-size: 0.6em; }
+form {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	padding: 1em 5em;
+}
+form > * { padding: 0.5em; }
+label, fieldset { margin-top: 1.5em; }
+.error {
+	color: red;
+	font-family: monospace;
+	white-space: pre;
+	text-align: left;
+}
+#save { width: 50%; }
+#output { margin-left: 6em; }
