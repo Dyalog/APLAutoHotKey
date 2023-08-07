@@ -3,7 +3,9 @@
  :If dev>0
      DevSetup CiderConfig.HOME
      GUI.dev←2-dev
+     GUI.Run
  :Else
      GUI.dev←0
+     GUI.Run
+     ⎕OFF
  :EndIf
- GUI.Run
