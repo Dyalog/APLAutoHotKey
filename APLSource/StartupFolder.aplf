@@ -1,13 +1,14 @@
-StartupFolder←{
+ StartupFolder←{
 ⍝ ⍵: options namespace
 ⍝ ←: options namespace with startup folder (or nothing) appended to outfile
 ⍝ Uses APLTeam WinReg utility https://tatin.dev/v1/packages/major_versions/aplteam-WinReg
-    0∊⍴⍵.startup:⍵
-    GetStartupDir←{
-        'user'≡⍵:WinReg.GetValue'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\Startup'
-        'all'≡⍵:WinReg.GetValue'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Common Startup'
-        ''
-    }
-    startup←GetStartupDir ⍵.startup
-    startup OutPath ⍵
-}
+     0=⍵.⎕NC'startup':⍵
+     0∊⍴⍵.startup:⍵
+     GetStartupDir←{
+         'user'≡⍵:WinReg.GetValue'HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\Startup'
+         'all'≡⍵:WinReg.GetValue'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders\Common Startup'
+         ''
+     }
+     startup←GetStartupDir ⍵.startup
+     startup OutPath ⍵
+ }
