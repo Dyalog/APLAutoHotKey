@@ -1,6 +1,7 @@
 DYALOGBUILD : 1.80.0
 EXEC        : db←1⊃⎕RSI ⍝ DBuild's home
 EXEC        : ⎕SE.Link.Import 'APLAutoHotKey' (db.path,'APLSource')
+EXEC        : ⎕SE.Link.Import 'APLAutoHotKey' (db.path,'apl-packages')
 EXEC        : APLAutoHotKey.DevSetup db.path
 EXEC        : ⎕EX'db'
 LX          : APLAutoHotKey.Run 0
