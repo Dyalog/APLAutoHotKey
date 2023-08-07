@@ -1,9 +1,6 @@
 res ← HandleHTTPRequest (hr evt pr update code msg mime url headers body method);root;http_code;http_msg;mime_type
-⎕←url
-⍝∘∘∘
 root ← 'http://dyalog_root/'
 body ← ⍎⊃(⎕NL ¯2)∩⊂('_'@('.'∘=))(≢root)↓url
-⎕←10↑body
 http_code ← 200 ⋄ http_msg ← 'OK'
 mime_type ← 'text/javascript' 'text/css' 'text/plain'⊃⍨'.js' '.css'⍳⊢/⎕nparts url
 update    ← 1
