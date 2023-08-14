@@ -1,7 +1,7 @@
  Shifts←{
 ⍝ ⍵: options namespace
 ⍝ ←: options namespace with API-ready shifts
-     0=⍵.⎕NC'shift':'Please select at least 1 shifting key'⎕SIGNAL 1
+     0=⍵.⎕NC'shift':'Please select at least 1 shifting key'⎕SIGNAL 400
      ⍵.shift←⍵.shift.⎕NL ¯2
      ⍵
  }
