@@ -1,4 +1,4 @@
- Run
+ Run;hr;html
  hr←⎕NEW⊂'HTMLRenderer'
  hr.onWebSocketReceive←'HandleWSReceive'
  hr.onHTTPRequest←'HandleHTTPRequest'
