@@ -1,12 +1,12 @@
-exe_path←LocateClassicExes;classic;dyalog;installed;reg_path
+ exe_path←LocateClassicExes;classic;dyalog;installed;reg_path
 ⍝ Uses APLTeam WinReg utility https://tatin.dev/v1/packages/major_versions/aplteam-WinReg
-dyalog←'SOFTWARE\Dyalog'
-:if ~WinReg.DoesKeyExist dyalog
-    exe_path←''
-:else
-    installed←WinReg.GetAllSubKeyNames dyalog
-    classic←installed⌿⍨'Dyalog APL/W'∘(⊃⍷)¨installed
-    reg_path←dyalog∘,¨'\',¨classic
-    exe_path←WinReg.GetValue¨reg_path,¨⊂'\dyalog'
-    exe_path,¨←⊂'\dyalog.exe'
-:endif
+ dyalog←'SOFTWARE\Dyalog'
+ :If ~WinReg.DoesKeyExist dyalog
+     exe_path←''
+ :Else
+     installed←WinReg.GetAllSubKeyNames dyalog
+     classic←installed⌿⍨'Dyalog APL/W'∘(⊃⍷)¨installed
+     reg_path←dyalog∘,¨'\',¨classic
+     exe_path←0~⍨WinReg.GetValue¨reg_path,¨⊂'\dyalog'
+     exe_path,¨←⊂'\dyalog.exe'
+ :EndIf
