@@ -5,8 +5,8 @@
      exe_path←''
  :Else
      installed←WinReg.GetAllSubKeyNames dyalog
-     classic←installed⌿⍨'Dyalog APL/W'∘(⊃⍷)¨installed
-     reg_path←dyalog∘,¨'\',¨classic
+     classic←>⌿'Dyalog APL/W' 'Unicode'∘.(∨/⍷)installed   ⍝ Is Dyalog APL/W but NOT Unicode
+     reg_path←dyalog∘,¨'\',¨classic⌿installed
      exe_path←0~⍨WinReg.GetValue¨reg_path,¨⊂'\dyalog'
      exe_path,¨←⊂'\dyalog.exe'
  :EndIf
