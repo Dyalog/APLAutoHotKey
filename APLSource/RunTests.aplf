@@ -6,7 +6,7 @@ LoadSnippets project_dir
 
 :If ~all
     opts←⎕NS ⍬
-    opts.layout←'en_GB'
+    opts.locale←'en_GB'
     opts.shift←'CapsLock' 'AltGr'
     opts.suspend←'LControl' 'Space'
     opts.outfile←OutFile opts
