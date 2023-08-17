@@ -19,14 +19,16 @@ This is an application to generate AutoHotKey scripts to enable keyboard input o
 
 ## Usage
 
-### GUI
-1. Download the [latest release workspace](https://github.com/Dyalog/APLAutoHotKey/releases), **APLAutoHotKey.dws**, from the releases page. `)LOAD` or double-click on the workspace file to launch the GUI application.
+### GUI (normal usage)
+1. Download and install [AutoHotKey v2](https://www.autohotkey.com/)
 
-2. Choose your locale/layout, shifting key, optional suspend shortcut and enter the path to the folder in which to save the resulting script. Then click the **Generate Script** button.
+2. Download the [latest release workspace](https://github.com/Dyalog/APLAutoHotKey/releases), **APLAutoHotKey.dws**, from the releases page. `)LOAD` or double-click on the workspace file to launch the GUI application.
+
+3. Choose your locale/layout, shifting key, optional suspend shortcut and enter the path to the folder in which to save the resulting script. Then click the **Generate Script** button.
 
     > The script name will be based on the options provided and it will have a file extension of **.ahk**. For example, `APL-en_GB-CapsLockRCtrl.ahk`.
 
-3. Double click on or otherwise run the **.ahk** script file to start the script and enable APL keyboard input using your chosen options.
+4. Double click on or otherwise run the **.ahk** script file to start the script and enable APL keyboard input using your chosen options.
 
 ### API
 The following demonstrates how to use the API to generate scripts programmatically.
