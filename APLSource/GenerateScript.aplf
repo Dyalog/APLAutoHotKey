@@ -6,6 +6,7 @@ GenerateScript←{
     map←keymaps⍎⍵.locale
     nl ← ⎕UCS 10
     script ←'#Requires AutoHotKey v2.0-',nl
+    script,←';Created with APLAutoHotKey v',version,nl
     script,←'user_suspend := False',nl
 
     Alt←('Alt'ReplaceForBoth'LAlt' 'RAlt')
