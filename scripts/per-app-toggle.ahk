@@ -1,9 +1,9 @@
 ; Script to demonstrate per-application toggle state
 
 user_suspend := False
-;didn't work out how to loop all but first in app Map
+;didn't work out how to loop all but first in app_suspend Map
 ;so have a separate Boolean for general suspend
-app_suspend := Map("User", False, "Classic", True, "Notepad", False, "VSCode", False)
+app_suspend := Map("Classic", True, "Notepad", False, "VSCode", False)
 
 CapsLock & SC029::
 { if GetKeyState("Shift","P") {
@@ -29,37 +29,46 @@ GroupAdd "VSCode", "ahk_exe C:\Users\rpark\AppData\Local\Programs\Microsoft VS C
 
 Check() {
   global user_suspend
-  global app_suspend
-  for group, state in app_suspend
-    if WinActive("ahk_group " group) && state {
-      Suspend True
-    } else if user_suspend {
-      Suspend True
-    } else {
-      Suspend False
+  global app_suspend  
+  sus := False
+  app_active := False
+  For group, state in app_suspend
+    If WinActive("ahk_group " group) {
+      app_active := True   ; any group window is active
+      sus := state         ; and its suspend state is True
     }
+  If app_active {
+    Suspend sus
+  } else {
+    Suspend user_suspend
+  }
 }
 
 ToggleSuspend() {
   global user_suspend
   global app_suspend
-  for group, state in app_suspend
-    if WinActive("ahk_group " group) {
-      if state {
-        app_suspend[group] := False
-      } else {
-        app_suspend[group] := True
-      }
-    } else {
-      if user_suspend {
-        user_suspend := False
-      } else {
-        user_suspend := True
-      }
+  app_active := False   ; Any group window is active
+  For group in app_suspend
+    If WinActive("ahk_group " group) {
+      app_active := True
+      app_suspend[group] := !app_suspend[group]
     }
+  If !app_active {
+    user_suspend := !user_suspend
+  }
 }
 
-SetTimer Check, 500
+;SetTimer Check, 500
+
+NotepadCheck() {
+  WinWaitActive "ahk_group Notepad"
+    Send "notepad now"
+    Suspend app_suspend["Notepad"]
+  WinWaitNotActive "ahk_group Notepad"
+    NotepadCheck()
+}
+
+NotepadCheck()
 
 #SuspendExempt
 LCtrl & Space::ToggleSuspend
@@ -70,5 +79,6 @@ CapsLock & i::
 {
   for group, state in app_suspend
     Send group state
+  Send user_suspend
 }
 #SuspendExempt False
